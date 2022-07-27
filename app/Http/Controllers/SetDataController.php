@@ -20,11 +20,12 @@ class SetDataController extends Controller
 
     public function setDataByDate($sport, $date)
     {
+        $date_for_api = str_replace('-', '', $date);
         $url =
             'https://prod-public-api.livescore.com/v1/api/app/date/' .
             $sport .
             '/' .
-            $date .
+            $date_for_api .
             '/5.30?MD=1';
         $sport_id = $this->getSportID($sport);
         echo $url;
