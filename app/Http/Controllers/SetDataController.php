@@ -97,6 +97,11 @@ class SetDataController extends Controller
                                     : '',
                             'status' => $event['Epr'],
 
+                            'cricket_phase' => (isset($event["EtTx"]) && $event["EtTx"] != '') ? $event["EtTx"] : null,
+                            'cricket_phase_info' => isset($event["ErnInf"]) && $event["ErnInf"] != '' ? $event["ErnInf"] : null,
+                            'live_time' => (isset($event["EpsL"]) && $event["EpsL"] != '') ? $event["EpsL"] : null,
+                            'live_status_comment' => (isset($event["ECo"]) && $event["ECo"] != '') ? $event["ECo"] : null,
+
                             'updated_at' => now(),
                         ]);
                 }
