@@ -1,3 +1,15 @@
+## EndPoints
+
+FROM DATABASE (Will take big time)
+- https://sports.pfplapp.com/backend/public/api/get/cricket/date/20220726
+- https://sports.pfplapp.com/backend/public/api/get/basketball/date/20220726
+- https://sports.pfplapp.com/backend/public/api/get/soccer/date/20220726
+
+FROM JSON
+- https://sports.pfplapp.com/backend/public/api/get/cricket/date/20220726/json
+- https://sports.pfplapp.com/backend/public/api/get/basketball/date/20220726/json
+- https://sports.pfplapp.com/backend/public/api/get/soccer/date/20220726/json
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
 <p align="center">
