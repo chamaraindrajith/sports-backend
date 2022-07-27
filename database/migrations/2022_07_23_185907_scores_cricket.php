@@ -17,20 +17,20 @@ class ScoresCricket extends Migration
             $table->increments('id');
             $table->integer('game_id');
 
-            $table->integer('t1i1r')->nullable();
-            $table->integer('t2i1r')->nullable();
-            $table->integer('t1i2r')->nullable();
-            $table->integer('t2i2r')->nullable();
+            $table->integer('t1i1r')->default('0');
+            $table->integer('t2i1r')->default('0');
+            $table->integer('t1i2r')->default('0');
+            $table->integer('t2i2r')->default('0');
 
-            $table->integer('t1i1w')->nullable();
-            $table->integer('t2i1w')->nullable();
-            $table->integer('t1i2w')->nullable();
-            $table->integer('t2i2w')->nullable();
+            $table->integer('t1i1w')->default('0');
+            $table->integer('t2i1w')->default('0');
+            $table->integer('t1i2w')->default('0');
+            $table->integer('t2i2w')->default('0');
             
-            $table->double('t1i1o')->nullable();
-            $table->double('t2i1o')->nullable();
-            $table->double('t1i2o')->nullable();
-            $table->double('t2i2o')->nullable();
+            $table->double('t1i1o')->default('0');
+            $table->double('t2i1o')->default('0');
+            $table->double('t1i2o')->default('0');
+            $table->double('t2i2o')->default('0');
 
             $table->integer('t1i1d')->nullable();
             $table->integer('t2i1d')->nullable();
