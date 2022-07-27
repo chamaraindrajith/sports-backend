@@ -130,51 +130,51 @@ class SetDataController extends Controller
                     't1i1r' =>
                         isset($event['Tr1C1']) && $event['Tr1C1'] != ''
                             ? $event['Tr1C1']
-                            : null,
+                            : 0,
                     't2i1r' =>
                         isset($event['Tr2C1']) && $event['Tr2C1'] != ''
                             ? $event['Tr2C1']
-                            : null,
+                            : 0,
                     't1i2r' =>
                         isset($event['Tr1C2']) && $event['Tr1C2'] != ''
                             ? $event['Tr1C2']
-                            : null,
+                            : 0,
                     't2i2r' =>
                         isset($event['Tr2C2']) && $event['Tr2C2'] != ''
                             ? $event['Tr2C2']
-                            : null,
+                            : 0,
                     't1i1w' =>
                         isset($event['Tr1CW1']) && $event['Tr1CW1'] != ''
                             ? $event['Tr1CW1']
-                            : null,
+                            : 0,
                     't2i1w' =>
                         isset($event['Tr2CW1']) && $event['Tr2CW1'] != ''
                             ? $event['Tr2CW1']
-                            : null,
+                            : 0,
                     't1i2w' =>
                         isset($event['Tr1CW2']) && $event['Tr1CW2'] != ''
                             ? $event['Tr1CW2']
-                            : null,
+                            : 0,
                     't2i2w' =>
                         isset($event['Tr2CW2']) && $event['Tr2CW2'] != ''
                             ? $event['Tr2CW2']
-                            : null,
+                            : 0,
                     't1i1o' =>
                         isset($event['Tr1CO1']) && $event['Tr1CO1'] != ''
                             ? $event['Tr1CO1']
-                            : null,
+                            : 0,
                     't2i1o' =>
                         isset($event['Tr2CO1']) && $event['Tr2CO1'] != ''
                             ? $event['Tr2CO1']
-                            : null,
+                            : 0,
                     't1i2o' =>
                         isset($event['Tr1CO2']) && $event['Tr1CO2'] != ''
                             ? $event['Tr1CO2']
-                            : null,
+                            : 0,
                     't2i2o' =>
                         isset($event['Tr2CO2']) && $event['Tr2CO2'] != ''
                             ? $event['Tr2CO2']
-                            : null,
+                            : 0,
                     't1i1d' =>
                         isset($event['Tr1CD1']) && $event['Tr1CD1'] != ''
                             ? $event['Tr1CD1']
