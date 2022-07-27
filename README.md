@@ -3,19 +3,19 @@
 GET
 
 FROM DATABASE (Will take big time)
-- https://sports.pfplapp.com/backend/public/api/get/cricket/date/20220726
-- https://sports.pfplapp.com/backend/public/api/get/basketball/date/20220726
-- https://sports.pfplapp.com/backend/public/api/get/soccer/date/20220726
+- https://sports.pfplapp.com/backend/public/api/get/cricket/date/2022-07-27
+- https://sports.pfplapp.com/backend/public/api/get/basketball/date/2022-07-27
+- https://sports.pfplapp.com/backend/public/api/get/soccer/date/2022-07-27
 
 FROM JSON
-- https://sports.pfplapp.com/backend/public/api/get/cricket/date/20220726/json
-- https://sports.pfplapp.com/backend/public/api/get/basketball/date/20220726/json
-- https://sports.pfplapp.com/backend/public/api/get/soccer/date/20220726/json
+- https://sports.pfplapp.com/backend/public/api/get/cricket/date/2022-07-27/json
+- https://sports.pfplapp.com/backend/public/api/get/basketball/date/2022-07-27/json
+- https://sports.pfplapp.com/backend/public/api/get/soccer/date/2022-07-27/json
 
 SET
-- https://sports.pfplapp.com/backend/public/api/set/cricket/date/20220726
-- https://sports.pfplapp.com/backend/public/api/set/basketball/date/20220726
-- https://sports.pfplapp.com/backend/public/api/set/soccer/date/20220726
+- https://sports.pfplapp.com/backend/public/api/set/cricket/date/2022-07-27
+- https://sports.pfplapp.com/backend/public/api/set/basketball/date/2022-07-27
+- https://sports.pfplapp.com/backend/public/api/set/soccer/date/2022-07-27
 
 ## Laravel
 
