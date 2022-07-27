@@ -4,38 +4,61 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
 
 class GetDataController extends Controller
 {
-    public function saveJson($array, $sport, $date) {
-        $path = "data/".$sport."/".$date;
+    public function saveJson($array, $sport, $date)
+    {
+        $path = 'data/' . $sport . '/' . $date;
         if (!file_exists($path)) {
             mkdir($path, 0777, true);
         }
-        $file = $path."/data.json";
-        
-        if (file_put_contents($file, json_encode($array))){
+        $file = $path . '/data.json';
+
+        if (file_put_contents($file, json_encode($array))) {
             // echo "JSON file created successfully...";
         } else {
             // echo "Oops! Error creating json file...";
         }
     }
-    
+
+    // public function urlDateToDate($date) {
+    //     $date = substr_replace( $date, '-', -2, 0 );
+    //     $date = substr_replace( $date, '-', 4, 0 );
+    //     $date = date('Y-m-d', strtotime($date));
+    //     return $date;
+    // }
+
     public function getDataByDate($sport, $date)
     {
+        // $date = $this->urlDateToDate($date);
+
         $sport_id = DB::table('sports')
             ->where('slug', $sport)
             ->get('id');
-        $games = DB::table('games')
-            ->where('sport_id', $sport_id[0]->id)
-            ->orderBy('id', 'DESC')->get();
+            
+        if ($sport_id[0]->id == 5) {
+            $games = DB::table('games')
+                ->where('sport_id', $sport_id[0]->id)
+                ->whereRaw('? between start_date and end_date', $date) // https://www.pakainfo.com/laravel-where-date-between-multiple-columns/
+                ->orderBy('id', 'DESC')
+                ->get();
+        } else {
+            $games = DB::table('games')
+                ->where('sport_id', $sport_id[0]->id)
+                ->where('start_date', $date)
+                ->orderBy('id', 'DESC')
+                ->get();
+        }
+
         $stages = [];
         foreach ($games as $key => $game) {
-           $stages['stages'] = $this->getStages($games);            
+            $stages['stages'] = $this->getStages($games);
         }
-        $this->saveJson($stages, $sport, '20220727');
+        $this->saveJson($stages, $sport, $date);
         return json_encode($stages);
     }
 
@@ -141,12 +164,12 @@ class GetDataController extends Controller
             $score = DB::table('scores')
                 ->where('game_id', $game_id)
                 ->get();
-                array_push($score_array, [
-                    'Tr1' => $score[0]->Tr1,
-                    'Tr2' => $score[0]->Tr2,
-                    'Tr1G' => $score[0]->Tr1G,
-                    'Tr2G' => $score[0]->Tr2G,
-                ]);
+            array_push($score_array, [
+                'Tr1' => $score[0]->Tr1,
+                'Tr2' => $score[0]->Tr2,
+                'Tr1G' => $score[0]->Tr1G,
+                'Tr2G' => $score[0]->Tr2G,
+            ]);
         }
         return $score_array;
     }

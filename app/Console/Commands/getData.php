@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
+use App\Http\Controllers\GetDataController;
 
 class getData extends Command
 {
@@ -43,8 +44,14 @@ class getData extends Command
         $date = date_format(now(), 'Ymd');
         $date_plus1 = date_format(now(), 'Ymd')+1;
         $date_plus2 = date_format(now(), 'Ymd')+2;
-        
-        Log::info("Cron is working fine! Get");
+
+        $GetDataController = new GetDataController;
+
+        $GetDataController->getDataByDate("cricket", $date);
+        $GetDataController->getDataByDate("soccer", $date);
+        $GetDataController->getDataByDate("basketball", $date);
+
+        Log::info("Cron is working fine! Set " . $date);
         return 0;
     }
 }

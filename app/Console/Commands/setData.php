@@ -49,7 +49,7 @@ class setData extends Command
 
         $SetDataController->setDataByDate("cricket", $date);
         $SetDataController->setDataByDate("soccer", $date);
-        $SetDataController->setDataByDate("cricket", $date);
+        $SetDataController->setDataByDate("basketball", $date);
 
         Log::info("Cron is working fine! Set " . $date);
         return 0;

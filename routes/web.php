@@ -22,7 +22,7 @@ Route::get('/', function () {
 
 Route::group(['prefix'=>'api'], function(){
     Route::group(['prefix'=>'/set/{sport}'], function(){
-        Route::get('/live', [SetDataController::class, 'setDataLive']); 
+        // Route::get('/live', [SetDataController::class, 'setDataLive']); 
         Route::get('/date/{date}', [SetDataController::class, 'setDataByDate']); 
     });
     Route::group(['prefix'=>'/get/{sport}'], function(){
