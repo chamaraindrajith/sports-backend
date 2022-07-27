@@ -41,7 +41,7 @@ class setData extends Command
     {
         $date_min2 = date_format(now(), 'Ymd')-2;
         $date_min1 = date_format(now(), 'Ymd')-1;
-        $date = date_format(now(), 'Ymd');
+        $date = date_format(now(), 'Y-m-d');
         $date_plus1 = date_format(now(), 'Ymd')+1;
         $date_plus2 = date_format(now(), 'Ymd')+2;
 

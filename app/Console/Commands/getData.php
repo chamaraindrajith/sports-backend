@@ -41,7 +41,7 @@ class getData extends Command
     {
         $date_min2 = date_format(now(), 'Ymd')-2;
         $date_min1 = date_format(now(), 'Ymd')-1;
-        $date = date_format(now(), 'Ymd');
+        $date = date_format(now(), 'Y-m-d');
         $date_plus1 = date_format(now(), 'Ymd')+1;
         $date_plus2 = date_format(now(), 'Ymd')+2;
 
@@ -51,7 +51,7 @@ class getData extends Command
         $GetDataController->getDataByDate("soccer", $date);
         $GetDataController->getDataByDate("basketball", $date);
 
-        Log::info("Cron is working fine! Set " . $date);
+        Log::info("Cron is working fine! get " . $date);
         return 0;
     }
 }
