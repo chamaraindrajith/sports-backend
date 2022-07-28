@@ -18,6 +18,7 @@ class SetNewsController extends Controller
             case 'football':
                 $this->saveJson($this->setFootball(), $sport, $date);
                 break;
+
             default:
                 # code...
                 break;
@@ -36,13 +37,9 @@ class SetNewsController extends Controller
             'X-RapidAPI-Key: 7795701e29msh045cee6ff0afd4ep1560b9jsn3ebc3aa4fb6a',
         ];
 
-        // $response = file_get_contents(public_path() . '/news.json');
-        // $response = json_decode($response, true);
-
         $setDataController = new SetDataController;
 
         $response = json_decode($setDataController->curlRequest($url, $headers), true);
-        echo json_encode( $response);
 
         $index = 0;
         foreach ($response['storyList'] as $stories_key => $stories) {
@@ -112,7 +109,6 @@ class SetNewsController extends Controller
         $setDataController = new SetDataController;
 
         $response = json_decode($setDataController->curlRequest($url, $headers), true);
-        // echo json_encode( $response);
 
         $index = 0;
         foreach ($response['feed'][0]['data']['now'][0]['video'] as $videos) {
@@ -142,7 +138,6 @@ class SetNewsController extends Controller
                 }
             }
         }
-        echo $index;
         return $data_array;
     }
 
@@ -159,7 +154,7 @@ class SetNewsController extends Controller
         
         if (!file_exists($image_path)) {
             
-            /** cricbuzz rapid */
+            /** espn football api **/
             if ($api == "espn_") {
                 $image_response = $setDataController->curlRequest($image_url, $headers);
                 file_put_contents($image_path, $image_response);
