@@ -33,9 +33,11 @@ class SetNewsController extends Controller
             'X-RapidAPI-Key: 7795701e29msh045cee6ff0afd4ep1560b9jsn3ebc3aa4fb6a',
         ];
 
-        $response = file_get_contents(public_path() . '/news.json');
+        // $response = file_get_contents(public_path() . '/news.json');
+        // $response = json_decode($response, true);
 
-        $response = json_decode($response, true);
+        $response = json_decode(SetDataController::curlRequest($url, $headers), true);
+        echo json_encode( $response);
 
         $index = 0;
         foreach ($response['storyList'] as $stories_key => $stories) {
@@ -83,7 +85,7 @@ class SetNewsController extends Controller
         if (!file_exists($image_path)) {
             
             /** cricbuzz rapid */
-            if ($api == "rapid_" && false) {
+            if ($api == "rapid_") {
                 $url = "https://cricbuzz-cricket.p.rapidapi.com/img/v1/i1/c" . $image_id . "/i.jpg?p=dete&d=low";
                 $image_response = SetDataController::curlRequest($url, $headers);
                 file_put_contents($image_path, $image_response);

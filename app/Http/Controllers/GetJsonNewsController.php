@@ -23,12 +23,10 @@ class GetJsonNewsController extends Controller
     
     public function getNewsByDate($sport, $date)
     {
-        $json = $this->getJson($sport, $date);
-
-        // $json = json_encode($json,true);   
-        $json = json_decode($json, true);
-
-        return View::make('json', compact('json'));
+        header('Content-Type: application/json');
+        $arr = $this->getJson($sport, $date);
+        $arr = json_decode($arr);
+        echo json_encode($arr);
     }
 
     public function today($sport)
