@@ -25,7 +25,7 @@ class GetJsonNewsController extends Controller
     {
         $json = $this->getJson($sport, $date);
 
-        $json = json_encode($json,true);   
+        // $json = json_encode($json,true);   
         $json = json_decode($json, true);
 
         return View::make('json', compact('json'));
