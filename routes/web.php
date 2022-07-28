@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SetDataController;
 use App\Http\Controllers\GetDataController;
 use App\Http\Controllers\GetJsonDataController;
+use App\Http\Controllers\SetNewsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,5 +34,8 @@ Route::group(['prefix'=>'api'], function(){
         // Route::get('/live/json', [GetJsonDataController::class, 'getDataLive']); 
         Route::get('/today/json', [GetJsonDataController::class, 'today']); 
         Route::get('/date/{date}/json', [GetJsonDataController::class, 'getDataByDate']); 
+    });
+    Route::group(['prefix'=>'/set/news/{sport}'], function(){
+        Route::get('/date/{date}', [SetNewsController::class, 'setNews']); 
     });
 });

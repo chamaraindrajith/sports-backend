@@ -29,7 +29,8 @@ class SetDataController extends Controller
             '/5.30?MD=1';
         $sport_id = $this->getSportID($sport);
         echo $url;
-        $response = json_decode($this->curlRequest($url), true);
+
+        $response = json_decode($this->curlRequest($url, array()), true);
 
         foreach ($response['Stages'] as $stage_key => $stage) {
             foreach ($stage['Events'] as $event_key => $event) {
@@ -209,9 +210,18 @@ class SetDataController extends Controller
         }
     }
 
-    public function curlRequest($url)
+    public function curlRequest($url, array $new_headers)
     {
+        // header("Content-Type: image/jpeg");
         $curl = curl_init();
+
+        $headers = array(
+            'cache-control: no-cache',
+        );
+
+        if (isset($new_headers)) {
+            $headers = array_merge($headers, $new_headers);
+        }
 
         curl_setopt_array($curl, [
             CURLOPT_URL => $url,
@@ -221,10 +231,7 @@ class SetDataController extends Controller
             CURLOPT_TIMEOUT => 30,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'GET',
-            CURLOPT_HTTPHEADER => [
-                'cache-control: no-cache',
-                'postman-token: 4e970479-ebbc-4b14-79b0-e6c3b37d2131',
-            ],
+            CURLOPT_HTTPHEADER => $headers,
         ]);
 
         $response = curl_exec($curl);

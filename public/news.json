@@ -1,0 +1,203 @@
+{
+    "storyList": [
+        {
+            "story": {
+                "id": 123243,
+                "hline": "Rain denies Shubman Gill his maiden 100",
+                "intro": "India finish with 225/3 in 36 overs; West Indies chasing DLS revised target of 257 in 35 overs",
+                "pubTime": "1658950744860",
+                "source": "Cricbuzz",
+                "storyType": "Reports",
+                "imageId": 239780,
+                "seoHeadline": "Rain denies Shubman Gill his maiden 100",
+                "context": "India tour of West Indies, 2022",
+                "coverImage": {
+                    "id": "239780",
+                    "caption": "Shubman Gill was stranded on run-a-ball 98*",
+                    "source": "AFP"
+                }
+            }
+        },
+        {
+            "ad": {
+                "name": "native_news_index",
+                "layout": "native_large",
+                "position": 1
+            }
+        },
+        {
+            "story": {
+                "id": 123242,
+                "hline": "ICC strongly defends ODI format",
+                "intro": "In the backdrop of South Africa withdrawing from their ODI tour of Australia and Ben Stokes quitting the format, many have questioned the relevance of 50-over cricket",
+                "pubTime": "1658948546302",
+                "source": "Cricbuzz",
+                "storyType": "News",
+                "imageId": 239782,
+                "seoHeadline": "ICC strongly defends ODI format",
+                "context": "50-over cricket",
+                "coverImage": {
+                    "id": "239782",
+                    "caption": "The ICC has defended the ODI format despite many questioning the relevance of 50-over cricket",
+                    "source": "Getty"
+                }
+            }
+        },
+        {
+            "story": {
+                "id": 123241,
+                "hline": "Nottinghamshire in pole position after Haseeb Hameed 94",
+                "intro": "Elsewhere, Kyle Abbott and Mohammad Abbas share seven as Yorkshire are bowled out for 272",
+                "pubTime": "1658947630330",
+                "source": "Cricbuzz",
+                "storyType": "Reports",
+                "imageId": 239776,
+                "seoHeadline": "Nottinghamshire in pole position after Haseeb Hameed 94",
+                "context": "County Championship, 2022",
+                "coverImage": {
+                    "id": "239776",
+                    "caption": "Hameed fell six short of his hundred",
+                    "source": "Getty"
+                }
+            }
+        },
+        {
+            "story": {
+                "id": 123240,
+                "hline": "Finn Allen's maiden ton sinks Scotland in series opener",
+                "intro": "Allen smashed 101 off 56 to power New Zealand to 225, a total that Scotland fell well short of",
+                "pubTime": "1658946189000",
+                "source": "Cricbuzz",
+                "storyType": "Reports",
+                "imageId": 239775,
+                "seoHeadline": "Finn Allen's maiden ton sinks Scotland in series opener",
+                "context": "New Zealand tour of Scotland, 2022",
+                "coverImage": {
+                    "id": "239775",
+                    "caption": "Finn Allen hit eight fours and six sixes in his knock.",
+                    "source": "Getty"
+                }
+            }
+        },
+        {
+            "story": {
+                "id": 123239,
+                "hline": "Asia Cup 2022 officially moved to UAE",
+                "intro": "Sri Lanka Cricket will retain hosting rights of the tournament, which will be played between August 27 and September 11",
+                "pubTime": "1658940872343",
+                "source": "Cricbuzz",
+                "storyType": "News",
+                "imageId": 239773,
+                "seoHeadline": "Asia Cup 2022 officially moved to UAE",
+                "context": "Asia Cup 2022",
+                "coverImage": {
+                    "id": "239773",
+                    "caption": "The UAE also hosted the previous edition of the tournament, in the ODI format in 2018, an event that was won by India",
+                    "source": "Getty"
+                }
+            }
+        },
+        {
+            "ad": {
+                "name": "native_news_index_2",
+                "layout": "native_large",
+                "position": 5
+            }
+        },
+        {
+            "story": {
+                "id": 123238,
+                "hline": "Dhananjaya ton headlines another day of SL dominance",
+                "intro": "Pakistan need 419 runs on the final day with nine wickets in hand",
+                "pubTime": "1658925213316",
+                "source": "Cricbuzz",
+                "storyType": "Reports",
+                "imageId": 239762,
+                "seoHeadline": "Dhananjaya de Silva ton headlines another day of Sri Lanka dominance",
+                "context": "SL V PAK, 2ND TEST",
+                "coverImage": {
+                    "id": "239762",
+                    "caption": "Dhananjaya de Silva notched up his ninth Test century ",
+                    "source": "AFP"
+                }
+            }
+        },
+        {
+            "story": {
+                "id": 123237,
+                "hline": "Sri Lanka dismiss Shafique after setting massive target",
+                "intro": "A century from Dhananjaya de Silva left the visitors needing 508 in the fourth innings for victory",
+                "pubTime": "1658916573788",
+                "source": "Cricbuzz",
+                "storyType": "Reports",
+                "imageId": 239758,
+                "seoHeadline": "Sri Lanka dismiss Shafique after setting massive target",
+                "context": "Pakistan tour of Sri Lanka, 2022",
+                "coverImage": {
+                    "id": "239758",
+                    "caption": "Dhananjaya de Silva celebrates getting to his century.",
+                    "source": "AFP"
+                }
+            }
+        },
+        {
+            "story": {
+                "id": 123236,
+                "hline": "Dhananjaya nears ton as Sri Lanka stretch lead past 400",
+                "intro": "Riding on the back of half-centuries by Dhananjaya de Silva and Dimuth Karunaratne, Sri Lanka extended their lead to 444 at Lunch on Day 4",
+                "pubTime": "1658906491975",
+                "source": "Cricbuzz",
+                "storyType": "Reports",
+                "imageId": 239755,
+                "seoHeadline": "Dhananjaya de Silva nears ton as Sri Lanka stretch lead past 400",
+                "context": "Pakistan tour of Sri Lanka, 2022",
+                "coverImage": {
+                    "id": "239755",
+                    "caption": "Dhananjaya was unbeaten on 84 when lunch was taken ",
+                    "source": "AFP"
+                }
+            }
+        },
+        {
+            "story": {
+                "id": 123235,
+                "hline": "We are sticking through these tough times: Nicholas Pooran ",
+                "intro": "After losing yet another ODI series to India, the West Indies skipper said that the players are 'hurting' but at the same time confident of steering the side back to winning ways",
+                "pubTime": "1658897234392",
+                "source": "Cricbuzz",
+                "storyType": "News",
+                "imageId": 239751,
+                "seoHeadline": "We are sticking through these tough times, says Pooran, West Indies",
+                "context": "West Indies v India, 2022",
+                "coverImage": {
+                    "id": "239751",
+                    "caption": "\"I keep telling winning and losing is contagious and at the moment in ODI cricket we're losing and we're finding ways to lose games,\" Pooran",
+                    "source": "AFP"
+                }
+            }
+        },
+        {
+            "story": {
+                "id": 123234,
+                "hline": "County Wrap: Ollie Pope fifty gives Surrey lead",
+                "intro": "Elsewhere, Derbyshire staged a great comeback in the final session to turn the tables against Worcestershire",
+                "pubTime": "1658861527471",
+                "source": "Cricbuzz",
+                "storyType": "Reports",
+                "imageId": 239750,
+                "seoHeadline": "County Wrap: Ollie Pope fifty gives Surrey lead",
+                "context": "County Cricket",
+                "coverImage": {
+                    "id": "239750",
+                    "caption": "Pope's 65 came off just 73 balls.",
+                    "source": "Getty"
+                }
+            }
+        }
+    ],
+    "lastUpdatedTime": "1658954001716",
+    "appIndex": {
+        "seoTitle": "Latest and breaking Cricket News - Cricbuzz | Cricbuzz.com",
+        "webURL": "http://www.cricbuzz.com/cricket-news"
+    }
+}
