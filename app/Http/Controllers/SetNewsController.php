@@ -14,6 +14,10 @@ class SetNewsController extends Controller
             case 'cricket':
                 $this->saveJson($this->setCricbuzz(), $sport, $date);
                 break;
+
+            case 'football':
+                $this->saveJson($this->setFootball(), $sport, $date);
+                break;
             
             default:
                 # code...
@@ -72,6 +76,68 @@ class SetNewsController extends Controller
             }
         }
         return $data_array;
+    }
+
+    function setFootball() {
+        $data_array = array();
+        
+        $url = 'https://onefeed.fan.api.espn.com/apis/v3/cached/contentEngine/oneFeed/leagues/soccer?source=ESPN.com+-+FAM&showfc=true&region=in&limit=20&lang=en&editionKey=espnin-en&isPremium=true';
+        $api = 'espn';
+        $api = $api . "_";
+        $headers = [];
+
+        $response = json_decode(SetDataController::curlRequest($url, $headers), true);
+        echo json_encode( $response);
+
+        $index = 0;
+        foreach ($response['feed']['data']['now'][0]['video'] as $videos_key => $videos) {
+            foreach ($videos as $key => $story) {
+                if (
+                    array_key_exists('id', $story) &&
+                    array_key_exists('headline', $story) &&
+                    array_key_exists('thumbnail', $story)
+                ) {
+                    $isExists = DB::table('news')
+                        ->where('id_api', $api . $story['id'])
+                        ->exists();
+                    if (!$isExists) {
+                        DB::table('news')->insert([
+                            'id_api' => $api . $story['id'],
+                            'title' => $story['headline'],
+                            'description' => $story['description'],
+                            'image_id' => 'image_'.$story['id'],
+                            'created_at' => now(),
+                        ]);
+                    }
+                    $this->saveFootballImage($api, 'image_'.$story['id'], $story['thumbnail']);
+
+                    $data_array = $this->setJson($data_array, $api, $index, $story);
+                    $index++;
+
+                }
+            }
+        }
+        return $data_array;
+    }
+
+    function saveFootballImage($api, $image_id, $image_url) {
+        $image_path = public_path() . '/data/news/images/';
+        if (!file_exists($image_path)) {
+            mkdir($image_path, 0777, true);
+        }
+        
+        $image_name = $api . $image_id . '.jpeg';
+        $image_path = $image_path . $image_name;
+        $headers = [];
+        
+        if (!file_exists($image_path)) {
+            
+            /** cricbuzz rapid */
+            if ($api == "espn_") {
+                $image_response = SetDataController::curlRequest($image_url, $headers);
+                file_put_contents($image_path, $image_response);
+            }
+        }
     }
 
     function saveImage(array $headers, $api, $image_id) {
