@@ -12,10 +12,14 @@ FROM JSON
 - https://sports.pfplapp.com/backend/public/api/get/basketball/date/2022-07-27/json
 - https://sports.pfplapp.com/backend/public/api/get/soccer/date/2022-07-27/json
 
+- https://sports.pfplapp.com/backend/public/api/get/news/cricket/date/2022-07-26/json
+
 SET
 - https://sports.pfplapp.com/backend/public/api/set/cricket/date/2022-07-27
 - https://sports.pfplapp.com/backend/public/api/set/basketball/date/2022-07-27
 - https://sports.pfplapp.com/backend/public/api/set/soccer/date/2022-07-27
+
+- https://sports.pfplapp.com/backend/public/api/set/news/cricket/date/2022-07-26
 
 ## Laravel
 
