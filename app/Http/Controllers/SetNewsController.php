@@ -102,9 +102,7 @@ class SetNewsController extends Controller
         $url = 'https://onefeed.fan.api.espn.com/apis/v3/cached/contentEngine/oneFeed/leagues/soccer?source=ESPN.com+-+FAM&showfc=true&region=in&limit=20&lang=en&editionKey=espnin-en&isPremium=true';
         $api = 'espn';
         $api = $api . "_";
-        $headers = [
-            'method: GET'
-        ];
+        $headers = [];
 
         $setDataController = new SetDataController;
 
