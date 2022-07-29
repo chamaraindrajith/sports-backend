@@ -15,8 +15,8 @@ class SetNewsController extends Controller
                 $this->saveJson($this->setCricbuzz(), $sport, $date);
                 break;
 
-            case 'football':
-                $this->saveJson($this->setFootball(), $sport, $date);
+            case 'soccer':
+                $this->saveJson($this->setSoccer(), $sport, $date);
                 break;
 
             default:
@@ -37,9 +37,7 @@ class SetNewsController extends Controller
             'X-RapidAPI-Key: 7795701e29msh045cee6ff0afd4ep1560b9jsn3ebc3aa4fb6a',
         ];
 
-        $setDataController = new SetDataController;
-
-        $response = json_decode($setDataController->curlRequest($url, $headers), true);
+        $response = json_decode(SetDataController::curlRequest($url, $headers), true);
 
         $index = 0;
         foreach ($response['storyList'] as $stories_key => $stories) {
@@ -83,20 +81,19 @@ class SetNewsController extends Controller
         }
         $image_name = $api . $image_id . '.jpeg';
         $image_path = $image_path . $image_name;
-        $setDataController = new SetDataController;
         
         if (!file_exists($image_path)) {
             
             /** cricbuzz rapid */
             if ($api == "rapid_") {
                 $url = "https://cricbuzz-cricket.p.rapidapi.com/img/v1/i1/c" . $image_id . "/i.jpg?p=dete&d=low";
-                $image_response = $setDataController->curlRequest($url, $headers);
+                $image_response = SetDataController::curlRequest($url, $headers);
                 file_put_contents($image_path, $image_response);
             }
         }
     }
 
-    function setFootball() {
+    function setSoccer() {
         $data_array = array();
         
         $url = 'https://onefeed.fan.api.espn.com/apis/v3/cached/contentEngine/oneFeed/leagues/soccer?source=ESPN.com+-+FAM&showfc=true&region=in&limit=20&lang=en&editionKey=espnin-en&isPremium=true';
@@ -128,9 +125,9 @@ class SetNewsController extends Controller
                             'created_at' => now(),
                         ]);
                     }
-                    $this->saveFootballImage($api, 'image_'.$videos['id'], $videos['thumbnail']);
+                    $this->saveSoccerImage($api, 'image_'.$videos['id'], $videos['thumbnail']);
 
-                    $data_array = $this->setFootballJson($data_array, $api, $index, $videos);
+                    $data_array = $this->setSoccerJson($data_array, $api, $index, $videos);
                     $index++;
 
                 }
@@ -139,13 +136,13 @@ class SetNewsController extends Controller
         return $data_array;
     }
 
-    function saveFootballImage($api, $image_id, $image_url) {
+    function saveSoccerImage($api, $image_id, $image_url) {
         $image_path = public_path() . '/data/news/images/';
         if (!file_exists($image_path)) {
             mkdir($image_path, 0777, true);
         }
         
-        $image_name = $api . $image_id . '.jpg';
+        $image_name = $api . $image_id . '.jpeg';
         $image_path = $image_path . $image_name;
         $headers = [];
         $setDataController = new SetDataController;
@@ -169,7 +166,7 @@ class SetNewsController extends Controller
         return $data_array;
     }
 
-    function setFootballJson($data_array, $api, $index, $videos) {
+    function setSoccerJson($data_array, $api, $index, $videos) {
         $data_array[$index]['id_api'] = $api . $videos['id'];
         $data_array[$index]['title'] = $videos['headline'];
         $data_array[$index]['description'] = $videos['description'];
@@ -187,7 +184,7 @@ class SetNewsController extends Controller
         $file = $path . '/news.json';
 
         if (file_put_contents($file, json_encode($array))) {
-            // echo json_encode($array);
+            echo json_encode($array);
             // echo "JSON file created successfully...";
         } else {
             // echo "Oops! Error creating json file...";
