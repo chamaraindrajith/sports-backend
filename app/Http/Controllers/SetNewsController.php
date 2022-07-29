@@ -106,30 +106,32 @@ class SetNewsController extends Controller
         $response = json_decode($setDataController->curlRequest($url, $headers), true);
 
         $index = 0;
-        foreach ($response['feed'][0]['data']['now'][0]['video'] as $videos) {
-            foreach ($videos as $key => $story) {
+
+        foreach ($response['feed'] as $feed) {
+            $now = $feed['data']['now'][0];
+            foreach ($now as $key => $value) {
                 if (
-                    array_key_exists('id', $videos) &&
-                    array_key_exists('headline', $videos) &&
-                    array_key_exists('thumbnail', $videos)
+                    array_key_exists('id', $now) &&
+                    array_key_exists('headline', $now) &&
+                    array_key_exists('id', $now['images'][0])
                 ) {
                     $isExists = DB::table('news')
-                        ->where('id_api', $api . $videos['id'])
+                        ->where('id_api', $api . $now['id'])
                         ->exists();
                     if (!$isExists) {
                         DB::table('news')->insert([
-                            'id_api' => $api . $videos['id'],
-                            'title' => $videos['headline'],
-                            'description' => $videos['description'],
-                            'image_id' => $videos['id'],
+                            'id_api' => $api . $now['id'],
+                            'title' => $now['headline'],
+                            'description' => $now['description'],
+                            'image_id' => $now['images'][0]['id'],
                             'created_at' => now(),
                         ]);
                     }
-                    $this->saveSoccerImage($api, 'image_'.$videos['id'], $videos['thumbnail']);
 
-                    $data_array = $this->setSoccerJson($data_array, $api, $index, $videos);
+                    $this->saveSoccerImage($api, 'image_'.$now['images'][0]['id'], $now['images'][0]['url']);
+
+                    $data_array = $this->setSoccerJson($data_array, $api, $index, $now);
                     $index++;
-
                 }
             }
         }
@@ -166,11 +168,11 @@ class SetNewsController extends Controller
         return $data_array;
     }
 
-    function setSoccerJson($data_array, $api, $index, $videos) {
-        $data_array[$index]['id_api'] = $api . $videos['id'];
-        $data_array[$index]['title'] = $videos['headline'];
-        $data_array[$index]['description'] = $videos['description'];
-        $data_array[$index]['image_id'] = $videos['id'];
+    function setSoccerJson($data_array, $api, $index, $now) {
+        $data_array[$index]['id_api'] = $api . $now['id'];
+        $data_array[$index]['title'] = $now['headline'];
+        $data_array[$index]['description'] = $now['description'];
+        $data_array[$index]['image_id'] = $now['images'][0]['id'];
         $data_array[$index]['created_at'] = now();
         return $data_array;
     }
