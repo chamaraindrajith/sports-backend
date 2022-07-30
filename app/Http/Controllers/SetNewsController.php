@@ -102,19 +102,20 @@ class SetNewsController extends Controller
         $headers = [];
 
         $setDataController = new SetDataController;
-
         $response = json_decode($setDataController->curlRequest($url, $headers), true);
 
         $index = 0;
 
         foreach ($response['feed'] as $feed) {
             $now = $feed['data']['now'][0];
-            foreach ($now as $key => $value) {
-                if (
-                    array_key_exists('id', $now) &&
-                    array_key_exists('headline', $now) &&
-                    array_key_exists('id', $now['images'][0])
-                ) {
+
+            if (
+                array_key_exists('id', $now) &&
+                array_key_exists('headline', $now) && 
+                count($now['images']) > 0 && 
+                array_key_exists('id', $now['images'][0])
+            ) {
+                foreach ($now as $key => $value) {
                     $isExists = DB::table('news')
                         ->where('id_api', $api . $now['id'])
                         ->exists();
@@ -127,13 +128,12 @@ class SetNewsController extends Controller
                             'created_at' => now(),
                         ]);
                     }
-
                     $this->saveSoccerImage($api, 'image_'.$now['images'][0]['id'], $now['images'][0]['url']);
-
-                    $data_array = $this->setSoccerJson($data_array, $api, $index, $now);
-                    $index++;
                 }
+                $data_array = $this->setSoccerJson($data_array, $api, $index, $now);
+                $index++;
             }
+
         }
         return $data_array;
     }
