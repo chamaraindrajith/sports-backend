@@ -20,6 +20,10 @@ class SetDataController extends Controller
 
     public function setDataByDate($sport, $date)
     {
+        $stage_index = 0;
+        $event_index = 0;
+        $data_array = array();
+        
         $date_for_api = str_replace('-', '', $date);
         $url =
             'https://prod-public-api.livescore.com/v1/api/app/date/' .
@@ -28,16 +32,29 @@ class SetDataController extends Controller
             $date_for_api .
             '/5.30?MD=1';
         $sport_id = $this->getSportID($sport);
-        echo $url;
+        // echo $url;
 
         $response = json_decode($this->curlRequest($url, array()), true);
 
         foreach ($response['Stages'] as $stage_key => $stage) {
+
+            $data_array['Stages'][$stage_index] = [
+                'Sid' => $stage['Sid'],
+                'Scd' => $stage['Scd'],
+                'Snm' => $stage['Snm'],
+                'Cid' => $stage['Cid'],
+                'Ccd' => $stage['Ccd'],
+                'Cnm' => $stage['Cnm'],
+                'sport_id' => $sport_id
+            ];
+
             foreach ($stage['Events'] as $event_key => $event) {
                 $teams1_ids = [];
                 $teams1_names = [];
                 $teams2_ids = [];
                 $teams2_names = [];
+                $team_index = 0;
+
                 foreach ($event['T1'] as $team) {
                     array_push($teams1_ids, $team['ID']);
                     array_push($teams1_names, $team['Nm']);
@@ -46,7 +63,14 @@ class SetDataController extends Controller
                         'id' => $team['ID'],
                         'name' => $team['Nm'],
                     ]);
-                }
+
+                    $data_array['Stages'][$stage_index]['Events'][$event_index]['T1'][$team_index] = [
+                        'ID' => $team['ID'],
+                        'Nm' => $team['Nm']
+                    ];
+                }   
+                $team_index = 0;
+
                 foreach ($event['T2'] as $team) {
                     array_push($teams2_ids, $team['ID']);
                     array_push($teams2_names, $team['Nm']);
@@ -55,10 +79,28 @@ class SetDataController extends Controller
                         'id' => $team['ID'],
                         'name' => $team['Nm'],
                     ]);
-                }
 
+                    $data_array['Stages'][$stage_index]['Events'][$event_index]['T2'][$team_index] = [
+                        'ID' => $team['ID'],
+                        'Nm' => $team['Nm']
+                    ];
+                }
+                
                 // https://stackoverflow.com/questions/21658926/storing-array-or-std-object-in-database-of-laravel-app
 
+                $data_array['Stages'][$stage_index]['Events'][$event_index] = [
+                    'Eid' => $event['Eid'],
+                    'Slug' => '',
+                    'Eid' => $event['Eid'],
+                    'Esd' => (isset($event["Esd"]) && $event["Esd"] != '') ? $event['Esd'] : null,
+                    'Ese' => (isset($event["Ese"]) && $event["Ese"] != '') ? $event['Ese'] : null,
+                    'EpsL' => (isset($event["EpsL"]) && $event["EpsL"] != '') ? $event['EpsL'] : null,
+                    'Epr' => $event['Epr'],
+                    'EtTx' => (isset($event["EtTx"]) && $event["EtTx"] != '') ? $event['EtTx'] : null,
+                    'ErnInf' => (isset($event["ErnInf"]) && $event["ErnInf"] != '') ? $event['ErnInf'] : null,
+                    'ECo' => (isset($event["ECo"]) && $event["ECo"] != '') ? $event['ECo'] : null
+                ];
+   
                 $isExists = DB::table('games')
                     ->where('id', $event['Eid'])
                     ->exists();
@@ -206,8 +248,14 @@ class SetDataController extends Controller
                     'name' => $stage['Snm'],
                     'category_id' => $stage['Cid']
                 ]);
+
+                $event_index++;
             }
+            
+            $stage_index++;
         }
+
+        $this->saveJson($data_array, $sport, $date);
     }
 
     public function curlRequest($url, array $new_headers)
@@ -439,4 +487,22 @@ class SetDataController extends Controller
             ]);
         }
     }
+
+    public function saveJson($array, $sport, $date)
+    {
+        $path = 'data/' . $sport . '/' . $date;
+        if (!file_exists($path)) {
+            mkdir($path, 0777, true);
+        }
+        $file = $path . '/data.json';
+
+        if (file_put_contents($file, json_encode($array))) {
+            echo json_encode($array);
+            // echo "JSON file created successfully...";
+        } else {
+            // echo "Oops! Error creating json file...";
+        }
+    }
+
+    
 }
