@@ -13,13 +13,11 @@ class SetDataController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function __invoke(Request $request)
-    {
+    public function __invoke(Request $request) {
         //
     }
 
-    public function setDataByDate($sport, $date)
-    {
+    public function setDataByDate($sport, $date) {
         $stage_index = 0;
         $event_index = 0;
         $data_array = array();
@@ -32,7 +30,6 @@ class SetDataController extends Controller
             $date_for_api .
             '/5.30?MD=1';
         $sport_id = $this->getSportID($sport);
-        // echo $url;
 
         $response = json_decode($this->curlRequest($url, array()), true);
 
@@ -114,7 +111,6 @@ class SetDataController extends Controller
                         'ground' => 'test',
                         'team_id_teams1' => serialize($teams1_ids),
                         'team_id_teams2' => serialize($teams2_ids),
-                        // 'stage_id' => $stage['Sid'],
                         'start_date' => (isset($event["Esd"]) && $event["Esd"] != '') ? $event["Esd"] : null,
                         'end_date' => (isset($event["Ese"]) && $event["Ese"] != '') ? $event["Ese"] : null,
                         'category_id' => $stage['Cid'],
@@ -258,8 +254,7 @@ class SetDataController extends Controller
         $this->saveJson($data_array, $sport, $date);
     }
 
-    public function curlRequest($url, array $new_headers)
-    {
+    public function curlRequest($url, array $new_headers) {
         // header("Content-Type: image/jpeg");
         $curl = curl_init();
 
@@ -294,8 +289,7 @@ class SetDataController extends Controller
         }
     }
 
-    public function setCategories(array $data)
-    {
+    public function setCategories(array $data) {
         $isExists = DB::table('categories')
             ->where('id', $data['id'])
             ->exists();
@@ -311,8 +305,7 @@ class SetDataController extends Controller
         }
     }
 
-    public function setStages(array $data)
-    {
+    public function setStages(array $data) {
         $isExists = DB::table('stages')
             ->where('id', $data['id'])
             ->exists();
@@ -327,8 +320,7 @@ class SetDataController extends Controller
         }
     }
 
-    public function setDataLive($sport)
-    {
+    public function setDataLive($sport) {
         /*
         $url =
             'https://prod-public-api.livescore.com/v1/api/app/live/' .
@@ -383,20 +375,17 @@ class SetDataController extends Controller
         */
     }
 
-    public function updateGame($data)
-    {
+    public function updateGame($data) {
     }
 
-    public function getSportID($sport)
-    {
+    public function getSportID($sport) {
         $sport_id = DB::table('sports')
             ->where('slug', $sport)
             ->get('id');
         return $sport_id[0]->id;
     }
 
-    public function setScores(array $data)
-    {
+    public function setScores(array $data) {
         if ($data['sport'] != 'cricket') {
             $isExists = DB::table('scores')
                 ->where('game_id', $data['game_id'])
@@ -474,8 +463,7 @@ class SetDataController extends Controller
         }
     }
 
-    public function setTeams(array $data)
-    {
+    public function setTeams(array $data) {
         $isExists = DB::table('teams')
             ->where('id', $data['id'])
             ->exists();
@@ -488,8 +476,7 @@ class SetDataController extends Controller
         }
     }
 
-    public function saveJson($array, $sport, $date)
-    {
+    public function saveJson($array, $sport, $date) {
         $path = 'data/' . $sport . '/' . $date;
         if (!file_exists($path)) {
             mkdir($path, 0777, true);
@@ -503,6 +490,4 @@ class SetDataController extends Controller
             // echo "Oops! Error creating json file...";
         }
     }
-
-    
 }
