@@ -128,7 +128,7 @@ class SetNewsController extends Controller
                             'created_at' => now(),
                         ]);
                     }
-                    $this->saveSoccerImage($api, 'image_'.$now['images'][0]['id'], $now['images'][0]['url']);
+                    $this->saveSoccerImage($api, $now['images'][0]['id'], $now['images'][0]['url']);
                 }
                 $data_array = $this->setSoccerJson($data_array, $api, $index, $now);
                 $index++;
