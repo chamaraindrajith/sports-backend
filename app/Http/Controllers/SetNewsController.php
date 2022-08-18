@@ -16,28 +16,35 @@ class SetNewsController extends Controller
                 break;
 
             case 'soccer':
-                $this->saveJson($this->setSoccer(), $sport, $date);
+                $this->saveJson($this->setESPN($sport), $sport, $date);
+                break;
+
+            case 'basketball':
+                $this->saveJson($this->setESPN($sport), $sport, $date);
                 break;
 
             default:
                 # code...
                 break;
         }
-       
     }
 
-    function setCricbuzz() {
-        $data_array = array();
-        
+    function setCricbuzz()
+    {
+        $data_array = [];
+
         $url = 'https://cricbuzz-cricket.p.rapidapi.com/news/v1/index';
         $api = 'rapid';
-        $api = $api . "_";
+        $api = $api . '_';
         $headers = [
             'X-RapidAPI-Host: cricbuzz-cricket.p.rapidapi.com',
             'X-RapidAPI-Key: 7795701e29msh045cee6ff0afd4ep1560b9jsn3ebc3aa4fb6a',
         ];
 
-        $response = json_decode(SetDataController::curlRequest($url, $headers), true);
+        $response = json_decode(
+            SetDataController::curlRequest($url, $headers),
+            true
+        );
 
         $index = 0;
         foreach ($response['storyList'] as $stories_key => $stories) {
@@ -59,50 +66,75 @@ class SetNewsController extends Controller
                             'created_at' => now(),
                         ]);
                     }
-                    $this->saveImage([
-                        'X-RapidAPI-Host: cricbuzz-cricket.p.rapidapi.com',
-                        'X-RapidAPI-Key: 7795701e29msh045cee6ff0afd4ep1560b9jsn3ebc3aa4fb6a',
-                        'Content-type: image/jpeg',
-                    ], $api, $story['coverImage']['id']);
+                    $this->saveImage(
+                        [
+                            'X-RapidAPI-Host: cricbuzz-cricket.p.rapidapi.com',
+                            'X-RapidAPI-Key: 7795701e29msh045cee6ff0afd4ep1560b9jsn3ebc3aa4fb6a',
+                            'Content-type: image/jpeg',
+                        ],
+                        $api,
+                        $story['coverImage']['id']
+                    );
 
-                    $data_array = $this->setJson($data_array, $api, $index, $story);
+                    $data_array = $this->setJson(
+                        $data_array,
+                        $api,
+                        $index,
+                        $story
+                    );
                     $index++;
-
                 }
             }
         }
         return $data_array;
     }
 
-    function saveImage(array $headers, $api, $image_id) {
+    function saveImage(array $headers, $api, $image_id)
+    {
         $image_path = public_path() . '/data/news/images/';
         if (!file_exists($image_path)) {
             mkdir($image_path, 0777, true);
         }
         $image_name = $api . $image_id . '.jpeg';
         $image_path = $image_path . $image_name;
-        
+
         if (!file_exists($image_path)) {
-            
             /** cricbuzz rapid */
-            if ($api == "rapid_") {
-                $url = "https://cricbuzz-cricket.p.rapidapi.com/img/v1/i1/c" . $image_id . "/i.jpg?p=dete&d=low";
-                $image_response = SetDataController::curlRequest($url, $headers);
+            if ($api == 'rapid_') {
+                $url =
+                    'https://cricbuzz-cricket.p.rapidapi.com/img/v1/i1/c' .
+                    $image_id .
+                    '/i.jpg?p=dete&d=low';
+                $image_response = SetDataController::curlRequest(
+                    $url,
+                    $headers
+                );
                 file_put_contents($image_path, $image_response);
             }
         }
     }
 
-    function setSoccer() {
-        $data_array = array();
-        
-        $url = 'https://onefeed.fan.api.espn.com/apis/v3/cached/contentEngine/oneFeed/leagues/soccer?source=ESPN.com+-+FAM&showfc=true&region=in&limit=20&lang=en&editionKey=espnin-en&isPremium=true';
+    function setESPN($sport)
+    {
+        $data_array = [];
+
+        if ($sport == 'nba') {
+            $url =
+                'https://onefeed.fan.api.espn.com/apis/v3/cached/contentEngine/oneFeed/leagues/nba?source=ESPN.com+-+FAM&showfc=true&region=in&limit=20&lang=en&editionKey=espnin-en&isPremium=true';
+        } elseif ($sport == 'soccer') {
+            $url =
+                'https://onefeed.fan.api.espn.com/apis/v3/cached/contentEngine/oneFeed/leagues/soccer?source=ESPN.com+-+FAM&showfc=true&region=in&limit=20&lang=en&editionKey=espnin-en&isPremium=true';
+        }
+
         $api = 'espn';
-        $api = $api . "_";
+        $api = $api . '_';
         $headers = [];
 
-        $setDataController = new SetDataController;
-        $response = json_decode($setDataController->curlRequest($url, $headers), true);
+        $setDataController = new SetDataController();
+        $response = json_decode(
+            $setDataController->curlRequest($url, $headers),
+            true
+        );
 
         $index = 0;
 
@@ -111,8 +143,8 @@ class SetNewsController extends Controller
 
             if (
                 array_key_exists('id', $now) &&
-                array_key_exists('headline', $now) && 
-                count($now['images']) > 0 && 
+                array_key_exists('headline', $now) &&
+                count($now['images']) > 0 &&
                 array_key_exists('id', $now['images'][0])
             ) {
                 foreach ($now as $key => $value) {
@@ -128,38 +160,50 @@ class SetNewsController extends Controller
                             'created_at' => now(),
                         ]);
                     }
-                    $this->saveSoccerImage($api, $now['images'][0]['id'], $now['images'][0]['url']);
+                    $this->saveESPNImage(
+                        $api,
+                        $now['images'][0]['id'],
+                        $now['images'][0]['url']
+                    );
                 }
-                $data_array = $this->setSoccerJson($data_array, $api, $index, $now);
+                $data_array = $this->setESPNJson(
+                    $data_array,
+                    $api,
+                    $index,
+                    $now
+                );
                 $index++;
             }
-
         }
         return $data_array;
     }
 
-    function saveSoccerImage($api, $image_id, $image_url) {
+    function saveESPNImage($api, $image_id, $image_url)
+    {
         $image_path = public_path() . '/data/news/images/';
         if (!file_exists($image_path)) {
             mkdir($image_path, 0777, true);
         }
-        
+
         $image_name = $api . $image_id . '.jpeg';
         $image_path = $image_path . $image_name;
         $headers = [];
-        $setDataController = new SetDataController;
-        
+        $setDataController = new SetDataController();
+
         if (!file_exists($image_path)) {
-            
             /** espn football api **/
-            if ($api == "espn_") {
-                $image_response = $setDataController->curlRequest($image_url, $headers);
+            if ($api == 'espn_') {
+                $image_response = $setDataController->curlRequest(
+                    $image_url,
+                    $headers
+                );
                 file_put_contents($image_path, $image_response);
             }
         }
     }
 
-    function setJson($data_array, $api, $index, $story) {
+    function setJson($data_array, $api, $index, $story)
+    {
         $data_array[$index]['id_api'] = $api . $story['id'];
         $data_array[$index]['title'] = $story['hline'];
         $data_array[$index]['description'] = $story['intro'];
@@ -168,7 +212,8 @@ class SetNewsController extends Controller
         return $data_array;
     }
 
-    function setSoccerJson($data_array, $api, $index, $now) {
+    function setESPNJson($data_array, $api, $index, $now)
+    {
         $data_array[$index]['id_api'] = $api . $now['id'];
         $data_array[$index]['title'] = $now['headline'];
         $data_array[$index]['description'] = $now['description'];
