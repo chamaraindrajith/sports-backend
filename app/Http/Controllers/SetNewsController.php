@@ -118,7 +118,7 @@ class SetNewsController extends Controller
     {
         $data_array = [];
 
-        if ($sport == 'nba') {
+        if ($sport == 'basketball') {
             $url =
                 'https://onefeed.fan.api.espn.com/apis/v3/cached/contentEngine/oneFeed/leagues/nba?source=ESPN.com+-+FAM&showfc=true&region=in&limit=20&lang=en&editionKey=espnin-en&isPremium=true';
         } elseif ($sport == 'soccer') {
