@@ -197,7 +197,12 @@ class GetDataController extends Controller
         $category_list = array();
         $index = 0;
 
+        $sport_id = DB::table('sports')
+            ->where('slug', $sport)
+            ->get('id');
+
         $categories = DB::table('categories')
+            ->where('sport_id', $sport_id[0]->id)
             ->select(array('id', 'slug', 'name'))
             ->get();
 
