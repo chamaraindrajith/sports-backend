@@ -18,6 +18,8 @@ FROM JSON
 - https://sports.pfplapp.com/backend/public/api/get/basketball/categories
 - https://sports.pfplapp.com/backend/public/api/get/soccer/categories
 
+- https://sports.pfplapp.com/backend/public/api/get/soccer/stages/34
+
 SET
 - https://sports.pfplapp.com/backend/public/api/set/cricket/date/2022-07-27
 - https://sports.pfplapp.com/backend/public/api/set/basketball/date/2022-07-27
