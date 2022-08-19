@@ -30,8 +30,10 @@ Route::group(['prefix'=>'api'], function(){
     Route::group(['prefix'=>'/get/{sport}'], function(){
         // Route::get('/live', [GetDataController::class, 'getDataLive']); 
         Route::get('/today', [GetDataController::class, 'today']); 
-        Route::get('/categories' , [GetDataController::class, 'getCategories']);
         Route::get('/date/{date}', [GetDataController::class, 'getDataByDate']); 
+
+        Route::get('/categories' , [GetDataController::class, 'getCategories']);
+        Route::get('/stages/{id}', [GetDataController::class, 'getCategoryStages']);
 
         // Route::get('/live/json', [GetJsonDataController::class, 'getDataLive']); 
         // Route::get('/today/json', [GetJsonDataController::class, 'today']); 
