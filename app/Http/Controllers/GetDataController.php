@@ -192,4 +192,24 @@ class GetDataController extends Controller
             ->get();
         return View::make('games', compact('games'));
     }
+
+    public function getCategories($sport) {
+        $category_list = array();
+        $index = 0;
+
+        $categories = DB::table('categories')
+            ->select(array('id', 'slug', 'name'))
+            ->get();
+
+        foreach ($categories as $category) {
+            $category_list[$index]['id'] = $category->id;
+            $category_list[$index]['slug'] = $category->slug;
+            $category_list[$index]['name'] = $category->name;
+
+            $index++;
+        }
+
+        header('Content-Type: application/json');
+        echo json_encode($category_list);
+    }
 }

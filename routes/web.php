@@ -30,6 +30,7 @@ Route::group(['prefix'=>'api'], function(){
     Route::group(['prefix'=>'/get/{sport}'], function(){
         // Route::get('/live', [GetDataController::class, 'getDataLive']); 
         Route::get('/today', [GetDataController::class, 'today']); 
+        Route::get('/categories' , [GetDataController::class, 'getCategories']);
         Route::get('/date/{date}', [GetDataController::class, 'getDataByDate']); 
 
         // Route::get('/live/json', [GetJsonDataController::class, 'getDataLive']); 
@@ -43,3 +44,5 @@ Route::group(['prefix'=>'api'], function(){
         Route::get('/date/{date}/json', [GetJsonNewsController::class, 'getNewsByDate']); 
     });
 });
+
+//https://sports.pfplapp.com/backend/public/api/get/cricket/categories
