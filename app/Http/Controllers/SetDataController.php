@@ -85,7 +85,7 @@ class SetDataController extends Controller
                 'sport_id' => $sport_id
             ];
 
-            if (in_array($stage['Scd'], $stage_list)) {
+            if (in_array($stage['Scd'], $stage_list) || $sport != 'soccer') {
                 foreach ($stage['Events'] as $event_key => $event) {
                     $teams1_ids = [];
                     $teams1_names = [];
