@@ -27,6 +27,11 @@ SET
 
 - https://sports.pfplapp.com/backend/public/api/set/news/cricket/date/2022-07-26
 
+
+CRON
+
+*	*	*	*	*	php /home/sports/public_html/backend/artisan schedule:run > /dev/null 2>&1
+
 ## Laravel
 
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
