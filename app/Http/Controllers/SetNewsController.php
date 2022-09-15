@@ -224,7 +224,8 @@ class SetNewsController extends Controller
 
     public function saveJson($array, $sport, $date)
     {
-        $path = public_path() . '/data/news/' . $sport . '/' . $date;
+        // $path = public_path() . '/data/news/' . $sport . '/' . $date;
+        $path = public_path() . '/data/news/' . $sport;
         if (!file_exists($path)) {
             mkdir($path, 0777, true);
         }

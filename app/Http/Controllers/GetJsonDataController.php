@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\View;
 class GetJsonDataController extends Controller
 {
     public function getJson($sport, $date) {
-        $path = "data/".$sport."/".$date;
+        $path = public_path() . "/data/".$sport."/".$date;
         if (!file_exists($path)) {
             mkdir($path, 0777, true);
         }

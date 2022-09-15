@@ -6,6 +6,12 @@
 <a target="_blank" href="api/set/news/cricket/date/{{$today}}">api/set/news/cricket/date/{{$today}}</a> <br>
 <a target="_blank" href="api/set/news/basketball/date/{{$today}}">api/set/news/basketball/date/{{$today}}</a>
 
+<h3>Get News Data</h3>
+
+<a target="_blank" href="api/get/news/soccer/date/{{$today}}/json">api/get/news/soccer/date/{{$today}}/json</a> <br>
+<a target="_blank" href="api/get/news/cricket/date/{{$today}}/json">api/get/news/cricket/date/{{$today}}/json</a> <br>
+<a target="_blank" href="api/get/news/basketball/date/{{$today}}/json">api/get/news/basketball/date/{{$today}}/json</a>
+
 <h3>Set Sports Data</h3>
 
 <a target="_blank" href="api/set/soccer/date/{{$today}}">api/set/soccer/date/{{$today}}</a> <br>

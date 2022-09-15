@@ -51,7 +51,7 @@ class getData extends Command
         $GetDataController->getDataByDate("soccer", $date);
         $GetDataController->getDataByDate("basketball", $date);
 
-        Log::info("Cron is working fine! get " . $date);
+        Log::info("Cron is working fine! Get Data " . $date);
         return 0;
     }
 }

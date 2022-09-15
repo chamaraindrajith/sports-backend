@@ -51,7 +51,7 @@ class setData extends Command
         $SetDataController->setDataByDate("soccer", $date);
         $SetDataController->setDataByDate("basketball", $date);
 
-        Log::info("Cron is working fine! Set " . $date);
+        Log::info("Cron is working fine! Set Data " . $date);
         return 0;
     }
 }

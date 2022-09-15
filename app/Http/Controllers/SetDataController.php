@@ -529,7 +529,7 @@ class SetDataController extends Controller
 
     public function saveJson($array, $sport, $date)
     {
-        $path = 'data/' . $sport . '/' . $date;
+        $path = public_path() . '/data/' . $sport . '/' . $date;
         if (!file_exists($path)) {
             mkdir($path, 0777, true);
         }
