@@ -26,8 +26,8 @@ class Games extends Migration
             // $table->integer('stage_id');
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
-            $table->integer('category_id');
-
+            $table->integer('category_id')->nullable();
+            $table->string('category_slug')->nullable();
             $table->string('cricket_phase')->nullable();
             $table->string('cricket_phase_info')->nullable();
             $table->string('live_time')->nullable();
