@@ -17,8 +17,8 @@ class Stages extends Migration
             $table->increments('id');
             $table->string('slug');
             $table->string('name');
-            $table->integer('category_id');
-            $table->string('category_slug');
+            $table->integer('category_id')->nullable();
+            $table->string('category_slug')->nullable();
         });
     }
 
