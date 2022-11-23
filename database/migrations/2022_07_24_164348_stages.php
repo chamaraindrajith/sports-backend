@@ -18,6 +18,7 @@ class Stages extends Migration
             $table->string('slug');
             $table->string('name');
             $table->integer('category_id');
+            $table->string('category_slug');
         });
     }
 
