@@ -79,7 +79,7 @@ class SetDataController extends Controller
                 'Sid' => $stage['Sid'],
                 'Scd' => $stage['Scd'],
                 'Snm' => $stage['Snm'],
-                'Cid' => $stage['Cid'],
+                'Cid' => (isset($stage["Cid"]) && $stage["Cid"] != '') ? $stage["Cid"] : null,
                 'Ccd' => $stage['Ccd'],
                 'Cnm' => $stage['Cnm'],
                 'sport_id' => $sport_id
@@ -155,7 +155,8 @@ class SetDataController extends Controller
                             'team_id_teams2' => serialize($teams2_ids),
                             'start_date' => (isset($event["Esd"]) && $event["Esd"] != '') ? $event["Esd"] : null,
                             'end_date' => (isset($event["Ese"]) && $event["Ese"] != '') ? $event["Ese"] : null,
-                            'category_id' => $stage['Cid'],
+                            'category_id' => (isset($stage["Cid"]) && $stage["Cid"] != '') ? $stage["Cid"] : null,
+                            'category_slug' => (isset($stage["Ccd"]) && $stage["Ccd"] != '') ? $stage["Ccd"] : null,
                             'status_text' =>
                             isset($event['EpsL']) && $event['EpsL'] != ''
                                 ? $event['EpsL']
@@ -274,7 +275,7 @@ class SetDataController extends Controller
                             : null,
                     ]);
 
-                    $category_data['id'] = $stage['Cid'];
+                    $category_data['id'] = (isset($stage["Cid"]) && $stage["Cid"] != '') ? $stage["Cid"] : null;
                     $category_data['slug'] = $stage['Ccd'];
                     $category_data['name'] = $stage['Cnm'];
                     $category_data['sport_id'] = $sport_id;
@@ -284,7 +285,8 @@ class SetDataController extends Controller
                         'id' => $stage['Sid'],
                         'slug' => $stage['Scd'],
                         'name' => $stage['Snm'],
-                        'category_id' => $stage['Cid']
+                        'category_id' => (isset($stage["Cid"]) && $stage["Cid"] != '') ? $stage["Cid"] : null,
+                        'category_slug' => (isset($stage["Ccd"]) && $stage["Ccd"] != '') ? $stage["Ccd"] : null
                     ]);
 
                     $event_index++;
@@ -362,6 +364,7 @@ class SetDataController extends Controller
                 'slug' => $data['slug'],
                 'name' => $data['name'],
                 'category_id' => $data['category_id'],
+                'category_slug' => $data['category_slug'],
             ]);
         }
     }
