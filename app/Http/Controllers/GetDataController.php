@@ -74,7 +74,7 @@ class GetDataController extends Controller
                     ->where('id', $game->stage_id)
                     ->get();
                 $category = DB::table('categories')
-                    ->where('id', $stage[0]->category_id)
+                    ->where('slug', $stage[0]->category_slug)
                     ->get();
 
                 array_push($stage_array, [
@@ -165,10 +165,10 @@ class GetDataController extends Controller
                 ->where('game_id', $game_id)
                 ->get();
             array_push($score_array, [
-                'Tr1' => $score[0]->Tr1,
-                'Tr2' => $score[0]->Tr2,
-                'Tr1G' => $score[0]->Tr1G,
-                'Tr2G' => $score[0]->Tr2G,
+                'Tr1' => (isset($score[0]->Tr1) && $score[0]->Tr1 != "") ? $score[0]->Tr1 : "",
+                'Tr2' => (isset($score[0]->Tr2) && $score[0]->Tr2 != "") ? $score[0]->Tr2 : "",
+                'Tr1G' => (isset($score[0]->Tr1G) && $score[0]->Tr1G != "") ? $score[0]->Tr1G : "",
+                'Tr2G' => (isset($score[0]->Tr2G) && $score[0]->Tr2G != "") ? $score[0]->Tr2G : "",
             ]);
         }
         return $score_array;
