@@ -26,7 +26,7 @@
 
 <h3>Get Sports Data (JSON)</h3>
 
-<a target="_blank" href="api/get/soccer/date/{{$today}}">api/get/soccer/date/{{$today}}/json</a> <br>
-<a target="_blank" href="api/get/cricket/date/{{$today}}">api/get/cricket/date/{{$today}}/json</a> <br>
-<a target="_blank" href="api/get/basketball/date/{{$today}}">api/get/basketball/date/{{$today}}/json</a>
+<a target="_blank" href="api/get/soccer/date/{{$today}}/json">api/get/soccer/date/{{$today}}/json</a> <br>
+<a target="_blank" href="api/get/cricket/date/{{$today}}/json">api/get/cricket/date/{{$today}}/json</a> <br>
+<a target="_blank" href="api/get/basketball/date/{{$today}}/json">api/get/basketball/date/{{$today}}/json</a>
 
