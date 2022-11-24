@@ -282,7 +282,7 @@ class GetDataController extends Controller
         $result = array();
         $index = 0;
         foreach ($responses as $response) {
-            $result = $response->name;
+            $result[0] = $response->name;
             $index++;
         }
 
@@ -302,7 +302,7 @@ class GetDataController extends Controller
         $result = array();
         $index = 0;
         foreach ($responses as $response) {
-            $result = $response->name;
+            $result[0] = $response->name;
             $index++;
         }
 
