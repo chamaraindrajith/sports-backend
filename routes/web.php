@@ -40,6 +40,10 @@ Route::group(['prefix'=>'api'], function(){
         // Route::get('/today/json', [GetJsonDataController::class, 'today']); 
         Route::get('/date/{date}/json', [GetJsonDataController::class, 'getDataByDate']); 
     });
+    Route::group(['prefix'=>'/get'], function(){
+        Route::get('/category/name', [GetDataController::class, 'getCategoryName']); 
+        Route::get('/stage/name', [GetDataController::class, 'getStageName']); 
+    });
     Route::group(['prefix'=>'/set/news/{sport}'], function(){
         Route::get('/date/{date}', [SetNewsController::class, 'setNews']); 
     });

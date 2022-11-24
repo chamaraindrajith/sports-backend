@@ -39,7 +39,7 @@ class GetDataController extends Controller
         $sport_id = DB::table('sports')
             ->where('slug', $sport)
             ->get('id');
-            
+
         if ($sport_id[0]->id == 5) {
             $games = DB::table('games')
                 ->where('sport_id', $sport_id[0]->id)
@@ -193,7 +193,8 @@ class GetDataController extends Controller
         return View::make('games', compact('games'));
     }
 
-    public function getCategories($sport) {
+    public function getCategories($sport)
+    {
         $category_list = array();
         $index = 0;
 
@@ -220,7 +221,8 @@ class GetDataController extends Controller
         echo json_encode($category_list);
     }
 
-    public function getStagesByCategories($sport, $category_slug) {
+    public function getStagesByCategories($sport, $category_slug)
+    {
         $stages_list = array();
         $index = 0;
 
@@ -267,4 +269,44 @@ class GetDataController extends Controller
     //     header('Content-Type: application/json');
     //     echo json_encode($stages_list);
     // }
+
+    public function getCategoryName()
+    {
+        $slug = $_GET['slug'];
+
+        $responses = DB::table('categories')
+            ->where('slug', $slug)
+            ->select(array('name'))
+            ->get();
+
+        $result = array();
+        $index = 0;
+        foreach ($responses as $response) {
+            $result = $response->name;
+            $index++;
+        }
+
+        header('Content-Type: application/json');
+        echo json_encode($result);
+    }
+
+    public function getStageName()
+    {
+        $slug = $_GET['slug'];
+
+        $responses = DB::table('stages')
+            ->where('slug', $slug)
+            ->select(array('name'))
+            ->get();
+
+        $result = array();
+        $index = 0;
+        foreach ($responses as $response) {
+            $result = $response->name;
+            $index++;
+        }
+
+        header('Content-Type: application/json');
+        echo json_encode($result);
+    }
 }
