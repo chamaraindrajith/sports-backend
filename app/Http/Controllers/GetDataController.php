@@ -210,6 +210,7 @@ class GetDataController extends Controller
             $category_list[$index]['id'] = $category->id;
             $category_list[$index]['slug'] = $category->slug;
             $category_list[$index]['name'] = $category->name;
+            $category_list[$index]['image'] = $category->slug;
 
             $index++;
         }
@@ -235,6 +236,7 @@ class GetDataController extends Controller
             $stages_list[$index]['id'] = $stage->id;
             $stages_list[$index]['slug'] = $stage->slug;
             $stages_list[$index]['name'] = $stage->name;
+            $stages_list[$index]['image'] = $category_slug;
 
             $index++;
         }
