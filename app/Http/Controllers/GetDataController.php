@@ -218,12 +218,16 @@ class GetDataController extends Controller
         echo json_encode($category_list);
     }
 
-    public function getCategoryStages($sport, $category_id) {
+    public function getStagesByCategories($sport, $category_slug) {
         $stages_list = array();
         $index = 0;
 
+        $sport_id = DB::table('sports')
+            ->where('slug', $sport)
+            ->get('id');
+
         $stages = DB::table('stages')
-            ->where('category_id', $category_id)
+            ->where('category_slug', $category_slug)
             ->select(array('id', 'slug', 'name'))
             ->get();
 
@@ -238,4 +242,25 @@ class GetDataController extends Controller
         header('Content-Type: application/json');
         echo json_encode($stages_list);
     }
+
+    // public function getCategoryStages($sport, $category_id) {
+    //     $stages_list = array();
+    //     $index = 0;
+
+    //     $stages = DB::table('stages')
+    //         ->where('category_id', $category_id)
+    //         ->select(array('id', 'slug', 'name'))
+    //         ->get();
+
+    //     foreach ($stages as $stage) {
+    //         $stages_list[$index]['id'] = $stage->id;
+    //         $stages_list[$index]['slug'] = $stage->slug;
+    //         $stages_list[$index]['name'] = $stage->name;
+
+    //         $index++;
+    //     }
+
+    //     header('Content-Type: application/json');
+    //     echo json_encode($stages_list);
+    // }
 }

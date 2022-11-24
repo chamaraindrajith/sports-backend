@@ -33,8 +33,8 @@ Route::group(['prefix'=>'api'], function(){
         Route::get('/date/{date}', [GetDataController::class, 'getDataByDate']); 
 
         Route::get('/categories' , [GetDataController::class, 'getCategories']);
-        Route::get('/{category_slug}/subcategories' , [GetDataController::class, 'getCategories']);
-        Route::get('/stages/{id}', [GetDataController::class, 'getCategoryStages']);
+        Route::get('/{category_slug}/stages' , [GetDataController::class, 'getStagesByCategories']);
+        // Route::get('/stages/{id}', [GetDataController::class, 'getCategoryStages']);
 
         // Route::get('/live/json', [GetJsonDataController::class, 'getDataLive']); 
         // Route::get('/today/json', [GetJsonDataController::class, 'today']); 

@@ -279,15 +279,15 @@ class SetDataController extends Controller
                     $category_data['slug'] = $stage['Ccd'];
                     $category_data['name'] = $stage['Cnm'];
                     $category_data['sport_id'] = $sport_id;
-
                     $this->setCategories($category_data);
+                    
                     $this->setStages([
                         'id' => $stage['Sid'],
                         'slug' => $stage['Scd'],
                         'name' => $stage['Snm'],
                         'category_id' => (isset($stage["Cid"]) && $stage["Cid"] != '') ? $stage["Cid"] : null,
                         'category_slug' => (isset($stage["Ccd"]) && $stage["Ccd"] != '') ? $stage["Ccd"] : null
-                    ]);
+                    ], $sport);
 
                     $event_index++;
                 }
@@ -352,8 +352,12 @@ class SetDataController extends Controller
         }
     }
 
-    public function setStages(array $data)
+    public function setStages(array $data, $sport)
     {
+        $sport_id = DB::table('sports')
+            ->where('slug', $sport)
+            ->get('id');
+
         $isExists = DB::table('stages')
             ->where('id', $data['id'])
             ->exists();
@@ -363,7 +367,8 @@ class SetDataController extends Controller
                 'id' => $data['id'],
                 'slug' => $data['slug'],
                 'name' => $data['name'],
-                'category_id' => $data['category_id'],
+                'sport_id' => $sport_id,
+                'category_id' => (isset($data['category_id']) && $data['category_id'] != '') ? $data['category_id'] : null,
                 'category_slug' => $data['category_slug'],
             ]);
         }
