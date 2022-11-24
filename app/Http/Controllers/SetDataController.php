@@ -338,7 +338,7 @@ class SetDataController extends Controller
     public function setCategories(array $data)
     {
         $isExists = DB::table('categories')
-            ->where('id', $data['id'])
+            ->where('slug', $data['slug'])
             ->exists();
 
         if (!$isExists) {
