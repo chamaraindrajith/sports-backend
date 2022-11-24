@@ -143,22 +143,22 @@ class GetDataController extends Controller
                 ->where('game_id', $game_id)
                 ->get();
             array_push($score_array, [
-                't1i1r' => $score[0]->t1i1r,
-                't2i1r' => $score[0]->t2i1r,
-                't1i2r' => $score[0]->t1i2r,
-                't2i2r' => $score[0]->t2i2r,
-                't1i1w' => $score[0]->t1i1w,
-                't2i1w' => $score[0]->t2i1w,
-                't1i2w' => $score[0]->t1i2w,
-                't2i2w' => $score[0]->t2i2w,
-                't1i1o' => $score[0]->t1i1o,
-                't2i1o' => $score[0]->t2i1o,
-                't1i2o' => $score[0]->t1i2o,
-                't2i2o' => $score[0]->t2i2o,
-                't1i1d' => $score[0]->t1i1d,
-                't2i1d' => $score[0]->t2i1d,
-                't1i2d' => $score[0]->t1i2d,
-                't2i2d' => $score[0]->t2i2d,
+                't1i1r' => (isset($score[0]->t1i1r) && $score[0]->t1i1r != "") ? $score[0]->t1i1r : "",
+                't2i1r' => (isset($score[0]->t2i1r) && $score[0]->t2i1r != "") ? $score[0]->t2i1r : "",
+                't1i2r' => (isset($score[0]->t1i2r) && $score[0]->t1i2r != "") ? $score[0]->t1i2r : "",
+                't2i2r' => (isset($score[0]->t2i2r) && $score[0]->t2i2r != "") ? $score[0]->t2i2r : "",
+                't1i1w' => (isset($score[0]->t1i1w) && $score[0]->t1i1w != "") ? $score[0]->t1i1w : "",
+                't2i1w' => (isset($score[0]->t2i1w) && $score[0]->t2i1w != "") ? $score[0]->t2i1w : "",
+                't1i2w' => (isset($score[0]->t1i2w) && $score[0]->t1i2w != "") ? $score[0]->t1i2w : "",
+                't2i2w' => (isset($score[0]->t2i2w) && $score[0]->t2i2w != "") ? $score[0]->t2i2w : "",
+                't1i1o' => (isset($score[0]->t1i1o) && $score[0]->t1i1o != "") ? $score[0]->t1i1o : "",
+                't2i1o' => (isset($score[0]->t2i1o) && $score[0]->t2i1o != "") ? $score[0]->t2i1o : "",
+                't1i2o' => (isset($score[0]->t1i2o) && $score[0]->t1i2o != "") ? $score[0]->t1i2o : "",
+                't2i2o' => (isset($score[0]->t2i2o) && $score[0]->t2i2o != "") ? $score[0]->t2i2o : "",
+                't1i1d' => (isset($score[0]->t1i1d) && $score[0]->t1i1d != "") ? $score[0]->t1i1d : "",
+                't2i1d' => (isset($score[0]->t2i1d) && $score[0]->t2i1d != "") ? $score[0]->t2i1d : "",
+                't1i2d' => (isset($score[0]->t1i2d) && $score[0]->t1i2d != "") ? $score[0]->t1i2d : "",
+                't2i2d' => (isset($score[0]->t2i2d) && $score[0]->t2i2d != "") ? $score[0]->t2i2d : "",
             ]);
         } else {
             $score = DB::table('scores')
