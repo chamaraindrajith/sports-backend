@@ -58,7 +58,7 @@ class GetDataController extends Controller
         foreach ($games as $key => $game) {
             $stages['stages'] = $this->getStages($games);
         }
-        $this->saveJson($stages, $sport, $date);
+        // $this->saveJson($stages, $sport, $date);
         return json_encode($stages);
     }
 
