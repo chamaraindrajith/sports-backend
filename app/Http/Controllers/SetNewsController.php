@@ -205,6 +205,7 @@ class SetNewsController extends Controller
     function setJson($data_array, $api, $index, $story)
     {
         $data_array[$index]['id_api'] = $api . $story['id'];
+        $data_array[$index]['api'] = $api;
         $data_array[$index]['title'] = $story['hline'];
         $data_array[$index]['description'] = $story['intro'];
         $data_array[$index]['image_id'] = $story['coverImage']['id'];
@@ -215,6 +216,7 @@ class SetNewsController extends Controller
     function setESPNJson($data_array, $api, $index, $now)
     {
         $data_array[$index]['id_api'] = $api . $now['id'];
+        $data_array[$index]['api'] = $api;
         $data_array[$index]['title'] = $now['headline'];
         $data_array[$index]['description'] = $now['description'];
         $data_array[$index]['image_id'] = $now['images'][0]['id'];
