@@ -89,39 +89,49 @@ class SetDataController extends Controller
                 foreach ($stage['Events'] as $event_key => $event) {
                     $teams1_ids = [];
                     $teams1_names = [];
+                    $teams1_images = [];
                     $teams2_ids = [];
                     $teams2_names = [];
+                    $teams1_images = [];
                     $team_index = 0;
 
                     foreach ($event['T1'] as $team) {
+                        
                         array_push($teams1_ids, $team['ID']);
                         array_push($teams1_names, $team['Nm']);
+                        array_push($teams1_images, (isset($team['Img']) && $team['Img'] != "") ? $team['Img'] : "");
 
                         $this->setTeams([
                             'id' => $team['ID'],
                             'name' => $team['Nm'],
+                            'image' => (isset($team['Img']) && $team['Img'] != "") ? $team['Img'] : "",
                         ]);
 
                         $data_array['Stages'][$stage_index]['Events'][$event_index]['T1'][$team_index] = [
                             'ID' => $team['ID'],
-                            'Nm' => $team['Nm']
+                            'Nm' => $team['Nm'],
+                            'Img' => (isset($team['Img']) && $team['Img'] != "") ? $team['Img'] : ""
                         ];
                     }
 
                     $team_index = 0;
 
                     foreach ($event['T2'] as $team) {
+                        
                         array_push($teams2_ids, $team['ID']);
                         array_push($teams2_names, $team['Nm']);
+                        array_push($teams1_images, (isset($team['Img']) && $team['Img'] != "") ? $team['Img'] : "");
 
                         $this->setTeams([
                             'id' => $team['ID'],
                             'name' => $team['Nm'],
+                            'image' => (isset($team['Img']) && $team['Img'] != "") ? $team['Img'] : "",
                         ]);
 
                         $data_array['Stages'][$stage_index]['Events'][$event_index]['T2'][$team_index] = [
                             'ID' => $team['ID'],
-                            'Nm' => $team['Nm']
+                            'Nm' => $team['Nm'],
+                            'Img' => (isset($team['Img']) && $team['Img'] != "") ? $team['Img'] : ""
                         ];
                     }
 
@@ -531,6 +541,7 @@ class SetDataController extends Controller
             DB::table('teams')->insert([
                 'id' => $data['id'],
                 'name' => $data['name'],
+                'image' => $data['image'],
             ]);
         }
     }

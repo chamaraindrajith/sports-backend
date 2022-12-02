@@ -129,6 +129,7 @@ class GetDataController extends Controller
             array_push($teams_array, [
                 'team_id' => $team,
                 'name' => $team_db[0]->name,
+                'image' => $team_db[0]->image,
             ]);
         }
         return $teams_array;
