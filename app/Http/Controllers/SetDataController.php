@@ -296,7 +296,7 @@ class SetDataController extends Controller
             $stage_index++;
         }
 
-        $this->saveJson($data_array, $sport, $date);
+        // $this->saveJson($data_array, $sport, $date);
     }
 
     public function curlRequest($url, array $new_headers)
