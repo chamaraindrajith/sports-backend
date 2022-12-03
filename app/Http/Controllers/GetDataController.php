@@ -164,6 +164,7 @@ class GetDataController extends Controller
                 't2i1d' => (isset($score[0]->t2i1d) && $score[0]->t2i1d != "") ? $score[0]->t2i1d : "",
                 't1i2d' => (isset($score[0]->t1i2d) && $score[0]->t1i2d != "") ? $score[0]->t1i2d : "",
                 't2i2d' => (isset($score[0]->t2i2d) && $score[0]->t2i2d != "") ? $score[0]->t2i2d : "",
+                'bat' => (isset($score[0]->bat) && $score[0]->bat != "") ? $score[0]->bat : "",
             ]);
         } else {
             $score = DB::table('scores')

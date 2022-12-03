@@ -291,6 +291,10 @@ class SetDataController extends Controller
                     isset($event['Tr2CD2']) && $event['Tr2CD2'] != ''
                         ? $event['Tr2CD2']
                         : null,
+                    'bat' =>
+                    isset($event['Ebat']) && $event['Ebat'] != ''
+                        ? $event['Ebat']
+                        : null,
                 ]);
 
                 $category_data['id'] = (isset($stage["Cid"]) && $stage["Cid"] != '') ? $stage["Cid"] : null;
@@ -511,6 +515,7 @@ class SetDataController extends Controller
                     't2i1d' => $data['t2i1d'],
                     't1i2d' => $data['t1i2d'],
                     't2i2d' => $data['t2i2d'],
+                    'bat' => $data['bat'],
                     'created_at' => now(),
                 ]);
             } else {
@@ -533,6 +538,7 @@ class SetDataController extends Controller
                         't2i1d' => $data['t2i1d'],
                         't1i2d' => $data['t1i2d'],
                         't2i2d' => $data['t2i2d'],
+                        'bat' => $data['bat'],
                         'updated_at' => now(),
                     ]);
             }
@@ -570,7 +576,8 @@ class SetDataController extends Controller
         }
     }
 
-    function saveTeamImage($image_name) {
+    function saveTeamImage($image_name)
+    {
         $this->saveImage(
             [],
             "https://lsm-static-prod.livescore.com/medium/" . $image_name,

@@ -37,6 +37,8 @@ class ScoresCricket extends Migration
             $table->integer('t1i2d')->nullable();
             $table->integer('t2i2d')->nullable();
 
+            $table->integer('bat')->nullable();
+
             $table->timestamps();
         });
     }
