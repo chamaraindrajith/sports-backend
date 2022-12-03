@@ -71,32 +71,29 @@ class GetDataController extends Controller
         $stages = [];
         foreach ($games as $key => $game) {
             if (!in_array($game->stage_id, $stages)) {
-                if ($stage_array == []) {
-                    array_push($stages, $game->stage_id);
+                array_push($stages, $game->stage_id);
 
-                    $stage = DB::table('stages')
-                        ->where('id', $game->stage_id)
-                        ->get();
-                    $category = DB::table('categories')
-                        ->where('slug', $stage[0]->category_slug)
-                        ->get();
-    
-                    array_push($stage_array, [
-                        'stage_id' => $game->stage_id,
-                        'name' => $stage[0]->name,
-                        'slug' => $stage[0]->slug,
-                        'category_id' => $stage[0]->category_id,
-                        'category_name' => $category[0]->name,
-                        'category_slug' => $category[0]->slug,
-                        'sport_id' => $category[0]->sport_id,
-                        'games' => $this->getGames(
-                            $games,
-                            $game->stage_id,
-                            $category[0]->sport_id
-                        ),
-                    ]);
-                }
-                
+                $stage = DB::table('stages')
+                    ->where('id', $game->stage_id)
+                    ->get();
+                $category = DB::table('categories')
+                    ->where('slug', $stage[0]->category_slug)
+                    ->get();
+
+                array_push($stage_array, [
+                    'stage_id' => $game->stage_id,
+                    'name' => $stage[0]->name,
+                    'slug' => $stage[0]->slug,
+                    'category_id' => $stage[0]->category_id,
+                    'category_name' => $category[0]->name,
+                    'category_slug' => $category[0]->slug,
+                    'sport_id' => $category[0]->sport_id,
+                    'games' => $this->getGames(
+                        $games,
+                        $game->stage_id,
+                        $category[0]->sport_id
+                    ),
+                ]);
             }
         }
         return $stage_array;
