@@ -44,13 +44,13 @@ class GetDataController extends Controller
             $games = DB::table('games')
                 ->where('sport_id', $sport_id[0]->id)
                 ->whereRaw('? between start_date and end_date', $date) // https://www.pakainfo.com/laravel-where-date-between-multiple-columns/
-                ->orderBy('id', 'DESC')
+                // ->orderBy('id', 'DESC')
                 ->get();
         } else {
             $games = DB::table('games')
                 ->where('sport_id', $sport_id[0]->id)
                 ->where('start_date', $date)
-                ->orderBy('id', 'DESC')
+                // ->orderBy('id', 'DESC')
                 ->get();
         }
 
