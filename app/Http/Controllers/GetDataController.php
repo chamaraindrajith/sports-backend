@@ -115,6 +115,7 @@ class GetDataController extends Controller
                     'live_status_comment' => $game->live_status_comment,
                     'start_date' => $game->start_date,
                     'end_date' => $game->end_date,
+                    'status' => $game->status,
                 ]);
             }
         }
