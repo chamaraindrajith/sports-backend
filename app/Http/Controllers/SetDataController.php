@@ -86,87 +86,112 @@ class SetDataController extends Controller
             ];
 
             // if (in_array($stage['Scd'], $stage_list) || $sport != 'soccer') {
-                foreach ($stage['Events'] as $event_key => $event) {
-                    $teams1_ids = [];
-                    $teams1_names = [];
-                    $teams1_images = [];
-                    $teams2_ids = [];
-                    $teams2_names = [];
-                    $teams1_images = [];
-                    $team_index = 0;
+            foreach ($stage['Events'] as $event_key => $event) {
+                $teams1_ids = [];
+                $teams1_names = [];
+                $teams1_images = [];
+                $teams2_ids = [];
+                $teams2_names = [];
+                $teams1_images = [];
+                $team_index = 0;
 
-                    foreach ($event['T1'] as $team) {
-                        
-                        array_push($teams1_ids, $team['ID']);
-                        array_push($teams1_names, $team['Nm']);
-                        array_push($teams1_images, (isset($team['Img']) && $team['Img'] != "") ? $team['Img'] : "");
+                foreach ($event['T1'] as $team) {
 
-                        $this->setTeams([
-                            'id' => $team['ID'],
-                            'name' => $team['Nm'],
-                            'image' => (isset($team['Img']) && $team['Img'] != "") ? $team['Img'] : "",
-                        ]);
+                    array_push($teams1_ids, $team['ID']);
+                    array_push($teams1_names, $team['Nm']);
+                    array_push($teams1_images, (isset($team['Img']) && $team['Img'] != "") ? $team['Img'] : "");
 
-                        $data_array['Stages'][$stage_index]['Events'][$event_index]['T1'][$team_index] = [
-                            'ID' => $team['ID'],
-                            'Nm' => $team['Nm'],
-                            'Img' => (isset($team['Img']) && $team['Img'] != "") ? $team['Img'] : ""
-                        ];
-                    }
+                    $this->setTeams([
+                        'id' => $team['ID'],
+                        'name' => $team['Nm'],
+                        'image' => (isset($team['Img']) && $team['Img'] != "") ? $team['Img'] : "",
+                    ]);
 
-                    $team_index = 0;
-
-                    foreach ($event['T2'] as $team) {
-                        
-                        array_push($teams2_ids, $team['ID']);
-                        array_push($teams2_names, $team['Nm']);
-                        array_push($teams1_images, (isset($team['Img']) && $team['Img'] != "") ? $team['Img'] : "");
-
-                        $this->setTeams([
-                            'id' => $team['ID'],
-                            'name' => $team['Nm'],
-                            'image' => (isset($team['Img']) && $team['Img'] != "") ? $team['Img'] : "",
-                        ]);
-
-                        $data_array['Stages'][$stage_index]['Events'][$event_index]['T2'][$team_index] = [
-                            'ID' => $team['ID'],
-                            'Nm' => $team['Nm'],
-                            'Img' => (isset($team['Img']) && $team['Img'] != "") ? $team['Img'] : ""
-                        ];
-                    }
-
-                    // https://stackoverflow.com/questions/21658926/storing-array-or-std-object-in-database-of-laravel-app
-
-                    $data_array['Stages'][$stage_index]['Events'][$event_index] = [
-                        'Eid' => $event['Eid'],
-                        'Slug' => '',
-                        'Eid' => $event['Eid'],
-                        'Esd' => (isset($event["Esd"]) && $event["Esd"] != '') ? $event['Esd'] : null,
-                        'Ese' => (isset($event["Ese"]) && $event["Ese"] != '') ? $event['Ese'] : null,
-                        'EpsL' => (isset($event["EpsL"]) && $event["EpsL"] != '') ? $event['EpsL'] : null,
-                        'Epr' => $event['Epr'],
-                        'EtTx' => (isset($event["EtTx"]) && $event["EtTx"] != '') ? $event['EtTx'] : null,
-                        'ErnInf' => (isset($event["ErnInf"]) && $event["ErnInf"] != '') ? $event['ErnInf'] : null,
-                        'ECo' => (isset($event["ECo"]) && $event["ECo"] != '') ? $event['ECo'] : null
+                    $data_array['Stages'][$stage_index]['Events'][$event_index]['T1'][$team_index] = [
+                        'ID' => $team['ID'],
+                        'Nm' => $team['Nm'],
+                        'Img' => (isset($team['Img']) && $team['Img'] != "") ? $team['Img'] : ""
                     ];
 
-                    $isExists = DB::table('games')
-                        ->where('id', $event['Eid'])
-                        ->exists();
+                    if (isset($team['Img']) && $team['Img'] != "") {
+                        $this->saveTeamImage($team['Img']);
+                    }
+                }
 
-                    if (!$isExists) {
-                        DB::table('games')->insert([
-                            'id' => $event['Eid'],
-                            'stage_id' => $stage['Sid'],
-                            'slug' => '',
-                            'sport_id' => $sport_id,
-                            'ground' => 'test',
-                            'team_id_teams1' => serialize($teams1_ids),
-                            'team_id_teams2' => serialize($teams2_ids),
-                            'start_date' => (isset($event["Esd"]) && $event["Esd"] != '') ? $event["Esd"] : null,
-                            'end_date' => (isset($event["Ese"]) && $event["Ese"] != '') ? $event["Ese"] : null,
-                            'category_id' => (isset($stage["Cid"]) && $stage["Cid"] != '') ? $stage["Cid"] : null,
-                            'category_slug' => (isset($stage["Ccd"]) && $stage["Ccd"] != '') ? $stage["Ccd"] : null,
+                $team_index = 0;
+
+                foreach ($event['T2'] as $team) {
+
+                    array_push($teams2_ids, $team['ID']);
+                    array_push($teams2_names, $team['Nm']);
+                    array_push($teams1_images, (isset($team['Img']) && $team['Img'] != "") ? $team['Img'] : "");
+
+                    $this->setTeams([
+                        'id' => $team['ID'],
+                        'name' => $team['Nm'],
+                        'image' => (isset($team['Img']) && $team['Img'] != "") ? $team['Img'] : "",
+                    ]);
+
+                    $data_array['Stages'][$stage_index]['Events'][$event_index]['T2'][$team_index] = [
+                        'ID' => $team['ID'],
+                        'Nm' => $team['Nm'],
+                        'Img' => (isset($team['Img']) && $team['Img'] != "") ? $team['Img'] : ""
+                    ];
+
+                    if (isset($team['Img']) && $team['Img'] != "") {
+                        $this->saveTeamImage($team['Img']);
+                    }
+                }
+
+                // https://stackoverflow.com/questions/21658926/storing-array-or-std-object-in-database-of-laravel-app
+
+                $data_array['Stages'][$stage_index]['Events'][$event_index] = [
+                    'Eid' => $event['Eid'],
+                    'Slug' => '',
+                    'Eid' => $event['Eid'],
+                    'Esd' => (isset($event["Esd"]) && $event["Esd"] != '') ? $event['Esd'] : null,
+                    'Ese' => (isset($event["Ese"]) && $event["Ese"] != '') ? $event['Ese'] : null,
+                    'EpsL' => (isset($event["EpsL"]) && $event["EpsL"] != '') ? $event['EpsL'] : null,
+                    'Epr' => $event['Epr'],
+                    'EtTx' => (isset($event["EtTx"]) && $event["EtTx"] != '') ? $event['EtTx'] : null,
+                    'ErnInf' => (isset($event["ErnInf"]) && $event["ErnInf"] != '') ? $event['ErnInf'] : null,
+                    'ECo' => (isset($event["ECo"]) && $event["ECo"] != '') ? $event['ECo'] : null
+                ];
+
+                $isExists = DB::table('games')
+                    ->where('id', $event['Eid'])
+                    ->exists();
+
+                if (!$isExists) {
+                    DB::table('games')->insert([
+                        'id' => $event['Eid'],
+                        'stage_id' => $stage['Sid'],
+                        'slug' => '',
+                        'sport_id' => $sport_id,
+                        'ground' => 'test',
+                        'team_id_teams1' => serialize($teams1_ids),
+                        'team_id_teams2' => serialize($teams2_ids),
+                        'start_date' => (isset($event["Esd"]) && $event["Esd"] != '') ? $event["Esd"] : null,
+                        'end_date' => (isset($event["Ese"]) && $event["Ese"] != '') ? $event["Ese"] : null,
+                        'category_id' => (isset($stage["Cid"]) && $stage["Cid"] != '') ? $stage["Cid"] : null,
+                        'category_slug' => (isset($stage["Ccd"]) && $stage["Ccd"] != '') ? $stage["Ccd"] : null,
+                        'status_text' =>
+                        isset($event['EpsL']) && $event['EpsL'] != ''
+                            ? $event['EpsL']
+                            : '',
+                        'status' => $event['Epr'],
+
+                        'cricket_phase' => (isset($event["EtTx"]) && $event["EtTx"] != '') ? $event["EtTx"] : null,
+                        'cricket_phase_info' => isset($event["ErnInf"]) && $event["ErnInf"] != '' ? $event["ErnInf"] : null,
+                        'live_time' => (isset($event["EpsL"]) && $event["EpsL"] != '') ? $event["EpsL"] : null,
+                        'live_status_comment' => (isset($event["ECo"]) && $event["ECo"] != '') ? $event["ECo"] : null,
+
+                        'created_at' => now(),
+                    ]);
+                } else {
+                    DB::table('games')
+                        ->where('id', $event['Eid'])
+                        ->update([
                             'status_text' =>
                             isset($event['EpsL']) && $event['EpsL'] != ''
                                 ? $event['EpsL']
@@ -178,129 +203,112 @@ class SetDataController extends Controller
                             'live_time' => (isset($event["EpsL"]) && $event["EpsL"] != '') ? $event["EpsL"] : null,
                             'live_status_comment' => (isset($event["ECo"]) && $event["ECo"] != '') ? $event["ECo"] : null,
 
-                            'created_at' => now(),
+                            'updated_at' => now(),
                         ]);
-                    } else {
-                        DB::table('games')
-                            ->where('id', $event['Eid'])
-                            ->update([
-                                'status_text' =>
-                                isset($event['EpsL']) && $event['EpsL'] != ''
-                                    ? $event['EpsL']
-                                    : '',
-                                'status' => $event['Epr'],
-
-                                'cricket_phase' => (isset($event["EtTx"]) && $event["EtTx"] != '') ? $event["EtTx"] : null,
-                                'cricket_phase_info' => isset($event["ErnInf"]) && $event["ErnInf"] != '' ? $event["ErnInf"] : null,
-                                'live_time' => (isset($event["EpsL"]) && $event["EpsL"] != '') ? $event["EpsL"] : null,
-                                'live_status_comment' => (isset($event["ECo"]) && $event["ECo"] != '') ? $event["ECo"] : null,
-
-                                'updated_at' => now(),
-                            ]);
-                    }
-
-                    $this->setScores([
-                        'sport' => $sport,
-                        'game_id' => $event['Eid'],
-                        'Tr1' =>
-                        isset($event['Tr1']) && $event['Tr1'] != ''
-                            ? $event['Tr1']
-                            : '',
-                        'Tr2' =>
-                        isset($event['Tr2']) && $event['Tr2'] != ''
-                            ? $event['Tr2']
-                            : '',
-                        'Tr1G' =>
-                        isset($event['Tr1G']) && $event['Tr1G'] != ''
-                            ? $event['Tr1G']
-                            : '',
-                        'Tr2G' =>
-                        isset($event['Tr1G']) && $event['Tr2G'] != ''
-                            ? $event['Tr2G']
-                            : '',
-
-                        't1i1r' =>
-                        isset($event['Tr1C1']) && $event['Tr1C1'] != ''
-                            ? $event['Tr1C1']
-                            : 0,
-                        't2i1r' =>
-                        isset($event['Tr2C1']) && $event['Tr2C1'] != ''
-                            ? $event['Tr2C1']
-                            : 0,
-                        't1i2r' =>
-                        isset($event['Tr1C2']) && $event['Tr1C2'] != ''
-                            ? $event['Tr1C2']
-                            : 0,
-                        't2i2r' =>
-                        isset($event['Tr2C2']) && $event['Tr2C2'] != ''
-                            ? $event['Tr2C2']
-                            : 0,
-                        't1i1w' =>
-                        isset($event['Tr1CW1']) && $event['Tr1CW1'] != ''
-                            ? $event['Tr1CW1']
-                            : 0,
-                        't2i1w' =>
-                        isset($event['Tr2CW1']) && $event['Tr2CW1'] != ''
-                            ? $event['Tr2CW1']
-                            : 0,
-                        't1i2w' =>
-                        isset($event['Tr1CW2']) && $event['Tr1CW2'] != ''
-                            ? $event['Tr1CW2']
-                            : 0,
-                        't2i2w' =>
-                        isset($event['Tr2CW2']) && $event['Tr2CW2'] != ''
-                            ? $event['Tr2CW2']
-                            : 0,
-                        't1i1o' =>
-                        isset($event['Tr1CO1']) && $event['Tr1CO1'] != ''
-                            ? $event['Tr1CO1']
-                            : 0,
-                        't2i1o' =>
-                        isset($event['Tr2CO1']) && $event['Tr2CO1'] != ''
-                            ? $event['Tr2CO1']
-                            : 0,
-                        't1i2o' =>
-                        isset($event['Tr1CO2']) && $event['Tr1CO2'] != ''
-                            ? $event['Tr1CO2']
-                            : 0,
-                        't2i2o' =>
-                        isset($event['Tr2CO2']) && $event['Tr2CO2'] != ''
-                            ? $event['Tr2CO2']
-                            : 0,
-                        't1i1d' =>
-                        isset($event['Tr1CD1']) && $event['Tr1CD1'] != ''
-                            ? $event['Tr1CD1']
-                            : null,
-                        't2i1d' =>
-                        isset($event['Tr2CD1']) && $event['Tr2CD1'] != ''
-                            ? $event['Tr2CD1']
-                            : null,
-                        't1i2d' =>
-                        isset($event['Tr1CD2']) && $event['Tr1CD2'] != ''
-                            ? $event['Tr1CD2']
-                            : null,
-                        't2i2d' =>
-                        isset($event['Tr2CD2']) && $event['Tr2CD2'] != ''
-                            ? $event['Tr2CD2']
-                            : null,
-                    ]);
-
-                    $category_data['id'] = (isset($stage["Cid"]) && $stage["Cid"] != '') ? $stage["Cid"] : null;
-                    $category_data['slug'] = $stage['Ccd'];
-                    $category_data['name'] = $stage['Cnm'];
-                    $category_data['sport_id'] = $sport_id;
-                    $this->setCategories($category_data);
-                    
-                    $this->setStages([
-                        'id' => $stage['Sid'],
-                        'slug' => $stage['Scd'],
-                        'name' => $stage['Snm'],
-                        'category_id' => (isset($stage["Cid"]) && $stage["Cid"] != '') ? $stage["Cid"] : null,
-                        'category_slug' => (isset($stage["Ccd"]) && $stage["Ccd"] != '') ? $stage["Ccd"] : null
-                    ], $sport);
-
-                    $event_index++;
                 }
+
+                $this->setScores([
+                    'sport' => $sport,
+                    'game_id' => $event['Eid'],
+                    'Tr1' =>
+                    isset($event['Tr1']) && $event['Tr1'] != ''
+                        ? $event['Tr1']
+                        : '',
+                    'Tr2' =>
+                    isset($event['Tr2']) && $event['Tr2'] != ''
+                        ? $event['Tr2']
+                        : '',
+                    'Tr1G' =>
+                    isset($event['Tr1G']) && $event['Tr1G'] != ''
+                        ? $event['Tr1G']
+                        : '',
+                    'Tr2G' =>
+                    isset($event['Tr1G']) && $event['Tr2G'] != ''
+                        ? $event['Tr2G']
+                        : '',
+
+                    't1i1r' =>
+                    isset($event['Tr1C1']) && $event['Tr1C1'] != ''
+                        ? $event['Tr1C1']
+                        : 0,
+                    't2i1r' =>
+                    isset($event['Tr2C1']) && $event['Tr2C1'] != ''
+                        ? $event['Tr2C1']
+                        : 0,
+                    't1i2r' =>
+                    isset($event['Tr1C2']) && $event['Tr1C2'] != ''
+                        ? $event['Tr1C2']
+                        : 0,
+                    't2i2r' =>
+                    isset($event['Tr2C2']) && $event['Tr2C2'] != ''
+                        ? $event['Tr2C2']
+                        : 0,
+                    't1i1w' =>
+                    isset($event['Tr1CW1']) && $event['Tr1CW1'] != ''
+                        ? $event['Tr1CW1']
+                        : 0,
+                    't2i1w' =>
+                    isset($event['Tr2CW1']) && $event['Tr2CW1'] != ''
+                        ? $event['Tr2CW1']
+                        : 0,
+                    't1i2w' =>
+                    isset($event['Tr1CW2']) && $event['Tr1CW2'] != ''
+                        ? $event['Tr1CW2']
+                        : 0,
+                    't2i2w' =>
+                    isset($event['Tr2CW2']) && $event['Tr2CW2'] != ''
+                        ? $event['Tr2CW2']
+                        : 0,
+                    't1i1o' =>
+                    isset($event['Tr1CO1']) && $event['Tr1CO1'] != ''
+                        ? $event['Tr1CO1']
+                        : 0,
+                    't2i1o' =>
+                    isset($event['Tr2CO1']) && $event['Tr2CO1'] != ''
+                        ? $event['Tr2CO1']
+                        : 0,
+                    't1i2o' =>
+                    isset($event['Tr1CO2']) && $event['Tr1CO2'] != ''
+                        ? $event['Tr1CO2']
+                        : 0,
+                    't2i2o' =>
+                    isset($event['Tr2CO2']) && $event['Tr2CO2'] != ''
+                        ? $event['Tr2CO2']
+                        : 0,
+                    't1i1d' =>
+                    isset($event['Tr1CD1']) && $event['Tr1CD1'] != ''
+                        ? $event['Tr1CD1']
+                        : null,
+                    't2i1d' =>
+                    isset($event['Tr2CD1']) && $event['Tr2CD1'] != ''
+                        ? $event['Tr2CD1']
+                        : null,
+                    't1i2d' =>
+                    isset($event['Tr1CD2']) && $event['Tr1CD2'] != ''
+                        ? $event['Tr1CD2']
+                        : null,
+                    't2i2d' =>
+                    isset($event['Tr2CD2']) && $event['Tr2CD2'] != ''
+                        ? $event['Tr2CD2']
+                        : null,
+                ]);
+
+                $category_data['id'] = (isset($stage["Cid"]) && $stage["Cid"] != '') ? $stage["Cid"] : null;
+                $category_data['slug'] = $stage['Ccd'];
+                $category_data['name'] = $stage['Cnm'];
+                $category_data['sport_id'] = $sport_id;
+                $this->setCategories($category_data);
+
+                $this->setStages([
+                    'id' => $stage['Sid'],
+                    'slug' => $stage['Scd'],
+                    'name' => $stage['Snm'],
+                    'category_id' => (isset($stage["Cid"]) && $stage["Cid"] != '') ? $stage["Cid"] : null,
+                    'category_slug' => (isset($stage["Ccd"]) && $stage["Ccd"] != '') ? $stage["Ccd"] : null
+                ], $sport);
+
+                $event_index++;
+            }
             // }
 
             $stage_index++;
@@ -559,6 +567,40 @@ class SetDataController extends Controller
             // echo "JSON file created successfully...";
         } else {
             // echo "Oops! Error creating json file...";
+        }
+    }
+
+    function saveTeamImage($image_name) {
+        $this->saveImage(
+            [],
+            "https://lsm-static-prod.livescore.com/medium/" . $image_name,
+            $image_name,
+            '/images/teams/'
+        );
+    }
+
+    function saveImage(array $new_headers, $image_url, $image_name, $image_path)
+    {
+        $headers = [
+            'Content-type: image/jpeg',
+        ];
+        if (isset($new_headers)) {
+            $headers = array_merge($headers, $new_headers);
+        }
+
+        $image_path = public_path() . $image_path;
+        if (!file_exists($image_path)) {
+            mkdir($image_path, 0777, true);
+        }
+
+        $image_path = $image_path . $image_name;
+        if (!file_exists($image_path)) {
+            $url = $image_url;
+            $image_response = $this->curlRequest(
+                $url,
+                $headers
+            );
+            file_put_contents($image_path, $image_response);
         }
     }
 }
