@@ -66,7 +66,7 @@ class SetNewsController extends Controller
                             'created_at' => now(),
                         ]);
                     }
-                    $this->saveImage(
+                    $this->saveNewsImage(
                         [
                             'X-RapidAPI-Host: cricbuzz-cricket.p.rapidapi.com',
                             'X-RapidAPI-Key: 7795701e29msh045cee6ff0afd4ep1560b9jsn3ebc3aa4fb6a',
@@ -89,7 +89,7 @@ class SetNewsController extends Controller
         return $data_array;
     }
 
-    function saveImage(array $headers, $api, $image_id)
+    function saveNewsImage(array $headers, $api, $image_id)
     {
         $image_path = public_path() . '/data/news/images/';
         if (!file_exists($image_path)) {
