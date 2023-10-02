@@ -23,9 +23,6 @@ class SetDataController extends Controller
         $stage_index = 0;
         $event_index = 0;
         $data_array = array();
-        $data_array['info'] = array(
-            'last_updated' => date('Y-m-d H:i:s')
-        );
 
         $date_for_api = str_replace('-', '', $date);
         $url =
@@ -569,7 +566,7 @@ class SetDataController extends Controller
         if (!file_exists($path)) {
             mkdir($path, 0777, true);
         }
-        $file = $path . '/data.json';
+        $file = $path . '/data1.json';
 
         if (file_put_contents($file, json_encode($array))) {
             echo json_encode($array);
