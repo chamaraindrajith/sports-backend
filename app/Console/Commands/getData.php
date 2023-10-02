@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\GetDataController;
+use App\Http\Controllers\SetDataController;
 
 class getData extends Command
 {
@@ -39,17 +40,22 @@ class getData extends Command
      */
     public function handle()
     {
-        $date_min2 = date_format(now(), 'Ymd')-2;
-        $date_min1 = date_format(now(), 'Ymd')-1;
+        // $date_min2 = date_format(now(), 'Ymd')-2;
+        // $date_min1 = date_format(now(), 'Ymd')-1;
         $date = date_format(now(), 'Y-m-d');
-        $date_plus1 = date_format(now(), 'Ymd')+1;
-        $date_plus2 = date_format(now(), 'Ymd')+2;
+        // $date_plus1 = date_format(now(), 'Ymd')+1;
+        // $date_plus2 = date_format(now(), 'Ymd')+2;
 
         $GetDataController = new GetDataController;
+        $SetDataController = new SetDataController;
 
         $GetDataController->getDataByDate("cricket", $date);
         $GetDataController->getDataByDate("soccer", $date);
         $GetDataController->getDataByDate("basketball", $date);
+
+        $SetDataController->setDataByDate("cricket", $date);
+        $SetDataController->setDataByDate("soccer", $date);
+        $SetDataController->setDataByDate("basketball", $date);
 
         Log::info("Cron is working fine! Get Data " . $date);
         return 0;
