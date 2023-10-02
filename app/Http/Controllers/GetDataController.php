@@ -56,6 +56,7 @@ class GetDataController extends Controller
 
         $stages = []; // reduce time by stop looping
         $stages['stages'] = array();
+        $stages['details'] = "test";
         foreach ($games as $key => $game) {
             if ($stages['stages'] == []) { // reduce time by stop looping
                 $stages['stages'] = $this->getStages($games);
