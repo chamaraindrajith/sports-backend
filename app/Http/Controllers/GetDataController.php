@@ -56,9 +56,6 @@ class GetDataController extends Controller
 
         $stages = []; // reduce time by stop looping
         $stages['stages'] = array();
-        $stages['info'] = array(
-            'last_updated' => date('Y-m-d H:i:s')
-        );
         foreach ($games as $key => $game) {
             if ($stages['stages'] == []) { // reduce time by stop looping
                 $stages['stages'] = $this->getStages($games);
