@@ -560,21 +560,21 @@ class SetDataController extends Controller
         }
     }
 
-    public function saveJson($array, $sport, $date)
-    {
-        $path = public_path() . '/data/' . $sport . '/' . $date;
-        if (!file_exists($path)) {
-            mkdir($path, 0777, true);
-        }
-        $file = $path . '/data1.json';
+    // public function saveJson($array, $sport, $date)
+    // {
+    //     $path = public_path() . '/data/' . $sport . '/' . $date;
+    //     if (!file_exists($path)) {
+    //         mkdir($path, 0777, true);
+    //     }
+    //     $file = $path . '/data.json';
 
-        if (file_put_contents($file, json_encode($array))) {
-            echo json_encode($array);
-            // echo "JSON file created successfully...";
-        } else {
-            // echo "Oops! Error creating json file...";
-        }
-    }
+    //     if (file_put_contents($file, json_encode($array))) {
+    //         echo json_encode($array);
+    //         // echo "JSON file created successfully...";
+    //     } else {
+    //         // echo "Oops! Error creating json file...";
+    //     }
+    // }
 
     function saveTeamImage($image_name)
     {
