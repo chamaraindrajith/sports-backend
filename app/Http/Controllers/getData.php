@@ -23,6 +23,7 @@ class getData extends Controller
 
     public function app($sport, $date, $utc_offset)
     {
+        header('Content-Type: application/json');
         $countryCode = $_GET['countryCode'];
         $locale = $_GET['locale'];
         $MD = $_GET['MD'];

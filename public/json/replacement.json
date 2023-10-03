@@ -3,8 +3,18 @@
       {
         "Sid": "stage_id",
         "Snm": "stage_name",
-        "test": "test2",
-        "test3": "test4"
+        "Scd": "stage_code",
+        "Cnm": "category_name",
+        "Ccd": "category_code",
+        "Eid": "event_id",
+        "ECo": "event_comment",
+        "Esd": "event_start_date",
+        "Ese": "event_end_date",
+        "EtTx": "event_text",
+        "EpsL": "event_phase_label",
+        "Eps": "event_phase",
+        "ErnInf": "event_information",
+        "Epr": "event_status"
       }
     ]
   }
