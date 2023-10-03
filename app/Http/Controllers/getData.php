@@ -33,7 +33,7 @@ class getData extends Controller
 
         // Read the JSON file
         $jsonFile = 'replacements.json';
-        $jsonData = file_get_contents($jsonFile);
+        $jsonData = file_get_contents("https://api.coderog.com/sports/public/json/replacement.json");
         $replacements = json_decode($jsonData, true);
 
         if ($replacements === null) {
