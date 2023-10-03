@@ -23,15 +23,13 @@ class getData extends Controller
 
     public function app($sport, $date, $utc_offset)
     {
-        $sport = "";
+        $countryCode = $_GET['countryCode'];
+        $locale = $_GET['locale'];
+        $MD = $_GET['MD'];
         $url =
-            'https://prod-public-api.livescore.com/v1/api/app/date/' . $sport .
-            '/' .
-            $date .
-            '/0.00?MD=1';
-
-        $response = json_decode($this->curlRequest($url, array()), true);
-        echo json_encode($response);
+            'https://prod-public-api.livescore.com/v1/api/app/date/' . $sport . '/' . $date . '/' . $utc_offset . '?countryCode=' . $countryCode . '&locale=' . $locale . '&MD=' . $MD;
+        // $response = json_decode($this->curlRequest($url, array()), true);
+        echo $this->curlRequest($url, array());
     }
 
     public function curlRequest($url, array $new_headers)
