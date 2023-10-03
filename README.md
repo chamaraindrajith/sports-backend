@@ -1,5 +1,7 @@
 ## EndPoints
 
+- https://api.coderog.com/sports/api/app/date/cricket/20231003/5.30?countryCode=LK&locale=en&MD=1
+
 GET
 
 FROM DATABASE (Will take big time)
