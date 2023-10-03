@@ -7,7 +7,6 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
-use Illuminate\Support\Facades\Log;
 
 class GetDataController extends Controller
 {
@@ -20,10 +19,8 @@ class GetDataController extends Controller
         $file = $path . '/data.json';
 
         if (file_put_contents($file, json_encode($array))) {
-            Log::info("JSON Ok " . $date);
             // echo "JSON file created successfully...";
         } else {
-            Log::info("JSON No " . $date);
             // echo "Oops! Error creating json file...";
         }
     }
