@@ -29,7 +29,28 @@ class getData extends Controller
         $url =
             'https://prod-public-api.livescore.com/v1/api/app/date/' . $sport . '/' . $date . '/' . $utc_offset . '?countryCode=' . $countryCode . '&locale=' . $locale . '&MD=' . $MD;
         // $response = json_decode($this->curlRequest($url, array()), true);
-        echo $this->curlRequest($url, array());
+
+
+        // Read the JSON file
+        $jsonFile = 'replacements.json';
+        $jsonData = file_get_contents($jsonFile);
+        $replacements = json_decode($jsonData, true);
+
+        if ($replacements === null) {
+            die("Error parsing JSON data from $jsonFile.");
+        }
+
+        // Input string
+        $inputString = $this->curlRequest($url, array());
+
+        // Apply replacements
+        foreach ($replacements['replace_strings'] as $replacement) {
+            $search = $replacement['search'];
+            $replace = $replacement['replace'];
+            $inputString = str_replace($search, $replace, $inputString);
+        }
+
+        echo $inputString;
     }
 
     public function curlRequest($url, array $new_headers)

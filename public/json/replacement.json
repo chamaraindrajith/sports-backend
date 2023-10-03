@@ -1,0 +1,12 @@
+{
+    "replace_strings": [
+      {
+        "search": "Sid",
+        "replace": "stage_id"
+      },
+      {
+        "search": "chocolate",
+        "replace": "vanilla"
+      }
+    ]
+  }
