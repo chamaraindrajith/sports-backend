@@ -2,7 +2,7 @@
     "replace_strings": [
       {
         "Sid": "stage_id",
-        "chocolate": "vanilla",
+        "Snm": "stage_name",
         "test": "test2",
         "test3": "test4"
       }
