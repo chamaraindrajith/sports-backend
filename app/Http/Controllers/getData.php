@@ -43,11 +43,10 @@ class getData extends Controller
         // Input string
         $inputString = $this->curlRequest($url, array());
 
-        // Apply replacements
         foreach ($replacements['replace_strings'] as $replacement) {
-            $search = $replacement['search'];
-            $replace = $replacement['replace'];
-            $inputString = str_replace($search, $replace, $inputString);
+            foreach ($replacement as $key => $value) {
+                $inputString = str_replace($key, $value, $inputString);
+            }
         }
 
         echo $inputString;
