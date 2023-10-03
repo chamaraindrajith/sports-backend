@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\getData
+use App\Http\Controllers\getData;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,4 +19,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/app/date/{sport}/{date}/{utc_offset}' , [getData::class, 'app']);
+Route::get('/app/date/{sport}/{date}/{utc_offset}', [getData::class, 'app']);
