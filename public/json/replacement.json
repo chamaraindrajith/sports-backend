@@ -16,7 +16,8 @@
             "Eps": "event_phase",
             "ErnInf": "event_information",
             "Epr": "event_status",
-            "Ebat": "bat"
+            "Ebat": "bat",
+            "Events": "events"
         }
     ]
 }
