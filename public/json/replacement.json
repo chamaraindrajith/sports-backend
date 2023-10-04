@@ -6,6 +6,7 @@
             "Snm": "stage_name",
             "Scd": "stage_code",
             "Cnm": "category_name",
+            "Csnm": "category_short_name",
             "Ccd": "category_code",
             "Eid": "event_id",
             "ECo": "event_comment",
