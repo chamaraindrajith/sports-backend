@@ -17,7 +17,27 @@
             "ErnInf": "event_information",
             "Epr": "event_status",
             "Ebat": "bat",
-            "Events": "events"
+            "Events": "events",
+            "T1": "t1",
+            "T2": "t2",
+            "Nm": "name",
+            "ID": "id",
+            "Tr1C1": "t1i1r",
+            "Tr2C1": "t2i1r",
+            "Tr1C2": "t1i2r",
+            "Tr2C2": "t2i2r",
+            "Tr1CW1": "t1i1w",
+            "Tr2CW1": "t2i1w",
+            "Tr1CW2": "t1i2w",
+            "Tr2CW2": "t2i2w",
+            "Tr1CO1": "t1i1o",
+            "Tr2CO1": "t2i1o",
+            "Tr1CO2": "t1i2o",
+            "Tr2CO2": "t2i2o",
+            "Tr1CD1": "t1i1d",
+            "Tr2CD1": "t2i1d",
+            "Tr1CD2": "t1i2d",
+            "Tr2CD2": "t2i2d"
         }
     ]
 }
