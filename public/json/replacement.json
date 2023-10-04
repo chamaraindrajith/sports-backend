@@ -2,12 +2,10 @@
     "replace_strings": [
         {
             "Stage": "stage",
-            "Events": "events",
             "Sid": "stage_id",
             "Snm": "stage_name",
             "Scd": "stage_code",
             "Cnm": "category_name",
-            "Csnm": "category_short_name",
             "Ccd": "category_code",
             "Eid": "event_id",
             "ECo": "event_comment",
@@ -17,7 +15,8 @@
             "EpsL": "event_phase_label",
             "Eps": "event_phase",
             "ErnInf": "event_information",
-            "Epr": "event_status"
+            "Epr": "event_status",
+            "Ebat": "bat"
         }
     ]
 }
