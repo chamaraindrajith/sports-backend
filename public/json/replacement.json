@@ -2,6 +2,7 @@
     "replace_strings": [
         {
             "Stage": "stage",
+            "Events": "events",
             "Sid": "stage_id",
             "Snm": "stage_name",
             "Scd": "stage_code",
